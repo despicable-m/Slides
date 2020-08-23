@@ -7,7 +7,7 @@ from django.db import IntegrityError
 from django.views.decorators.csrf import csrf_exempt
 import json
 
-from .models import User, University, School, Program
+from .models import User, University, School, Program, Level, Course
 
 
 # Create your views here.
@@ -32,12 +32,22 @@ def register(request):
                 for school in schools:
                     school_dict[school.id] = school.school
                 return JsonResponse({"schools": school_dict})
+            # Get all programs in the school
             elif option == "sch":
                 programs = Program.objects.filter(school=the_id)
                 program_dict = dict()
                 for program in programs:
                     program_dict[program.id] = program.program
                 return JsonResponse({"programs":program_dict})
+            # Get all levels the selected program has
+            elif option == "pro":
+                levels = Level.objects.filter(program=the_id)
+                level_dict = dict()
+                for level in levels:
+                    level_dict[level.id] = level.level
+                
+                print(level_dict)
+                return JsonResponse({"levels":level_dict})
         else:
             username = request.POST["username"]
             first_name = request.POST["first-name"]
@@ -45,17 +55,19 @@ def register(request):
             university = University.objects.get(pk=request.POST["university"])
             school = School.objects.get(pk=request.POST["school"])
             program = Program.objects.get(pk=request.POST["program"])
+            level = Level.objects.get(pk=request.POST["level"])
             password = request.POST["password"]
 
             try:
                 user = User.objects.create_user(username,
                 first_name=first_name, last_name=last_name,
                 university=university, school=school,
-                program=program, password=password)
+                program=program, level=level, password=password)
                 user.save()
             except IntegrityError:
                 print("Integrity error")
-    
+            login(request, user)
+            return HttpResponseRedirect(reverse("index"))
     universities = University.objects.all()
     return render(request, "slides/register.html", {
         "universities": universities
@@ -85,4 +97,12 @@ def logout_view(request):
 
 
 def upload(request):
-    pass
+    
+    courses = Course.objects.filter(
+        level__user__program=request.user.program,
+        level__user__university=request.user.university,
+        level__user__school=request.user.school)
+
+    return render(request, "slides/upload.html", {
+        "courses":courses
+    })

@@ -1,0 +1,27 @@
+{% extends "slides/layout.html" %}
+{% load static %}
+
+{% block title %}
+    upload
+{% endblock %}
+
+
+{% block body %}
+    {% if message %}
+        <div class="message">{{ message }}</div>
+    {% endif %}
+
+    <form class="slides-form" action="{% url 'upload' %}"
+        method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <select id="course" name="course">
+            <option value="">---------</option>
+            {% for course in courses %}
+            <option value="{{ course.id }}">{{ course.course }}</option>
+            {% endfor %}
+        </select>
+        <input id="topic" type="text" placeholder="Topic" name="topic">
+        <input type="file" >
+        <button type="submit" id="login-button">Upload</button>
+    </form>
+{% endblock %}

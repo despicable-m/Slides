@@ -20,7 +20,9 @@ document.addEventListener('DOMContentLoaded', function () {
     let uni = document.querySelector('#university')
     let sch = document.querySelector('#school')
     let pro = document.querySelector('#program')
+    let lvl = document.querySelector('#level')
 
+    // School
     uni.addEventListener('change', () => {
         if (uni.value != "") {
             fetch("/register", {
@@ -43,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     })
 
+    // Programs
     sch.addEventListener('change', () => {
         if (sch.value != "") {
             fetch("/register", {
@@ -60,6 +63,29 @@ document.addEventListener('DOMContentLoaded', function () {
                 })
                 .then(response => response.json())
                 .then(json => change(json["programs"], "sch"))
+
+        }
+
+    })
+
+    // Level
+    pro.addEventListener('change', () => {
+        if (pro.value != "") {
+            fetch("/register", {
+                    method: "POST",
+                    credentials: 'same-origin',
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': csrftoken,
+                    },
+                    body: JSON.stringify({
+                        id: pro.value,
+                        opt: "pro"
+                    })
+                })
+                .then(response => response.json())
+                .then(json => change(json["levels"], "lvl"))
 
         }
 
@@ -90,6 +116,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 option.text = data[key]
                 pro.add(option)
             }
+        }
+        else if (opt === "lvl") {
+            for (i = 0; lvl.length > 1; i++) {
+                lvl.remove(lvl.length - 1)
+            }
+
+            for (const key of Object.keys(data)) {
+                var option = document.createElement("option")
+                option.value = key
+                option.text = data[key]
+                lvl.add(option)
+            }            
         }
     }
 })
