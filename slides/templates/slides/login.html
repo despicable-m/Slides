@@ -1,0 +1,19 @@
+{% extends "slides/layout.html" %}
+{% load static %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+
+{% block body %}
+    {% if message %}
+        <div class="message">{{ message }}</div>
+    {% endif %}
+    <form class="slides-form" action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        <input id="username" type="text" placeholder="Username" name="username">
+        <input id="password" type="password" placeholder="Password" name="password">
+        <button type="submit" id="login-button">Login</button>
+    </form>
+{% endblock %}

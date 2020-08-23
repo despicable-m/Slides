@@ -1,0 +1,19 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %} Slides {% endblock %}</title>
+        <link href="{% static 'slides/styles.css' %}" rel="stylesheet">
+        <script src="{% static 'slides/script.js' %}"></script>
+        {% block script %}
+        {% endblock %}
+    </head>
+
+    <body>
+        <div class="body">
+            {% block body %}
+            {% endblock %}
+        </div>
+    </body>
+</html>

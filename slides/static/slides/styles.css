@@ -1,0 +1,12 @@
+.slides-form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin-right: auto;
+  margin-right: auto;
+}
+.slides-form input, .slides-form select, .slides-form label {
+  margin: 5px;
+}
+
+/*# sourceMappingURL=styles.css.map */

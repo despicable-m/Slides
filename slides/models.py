@@ -8,11 +8,7 @@ from django.db import models
 
 # Create your models here.
 class University(models.Model):
-    UNIVERSITIES = [
-        ('UHAS', 'University of Health and Allied Sciences'),
-        ('UG', 'University of Ghana'),
-    ]
-    university = models.CharField(max_length=30, choices=UNIVERSITIES)
+    university = models.CharField(max_length=100,)
 
     class Meta:
         verbose_name_plural = "universities"

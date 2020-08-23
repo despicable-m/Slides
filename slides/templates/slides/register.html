@@ -1,0 +1,43 @@
+{% extends "slides/layout.html" %}
+{% load static %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+
+{% block body %}
+    {% if message %}
+        <div class="message">{{ message }}</div>
+    {% endif %}
+    <form class="slides-form" action="{% url 'register' %}" method="POST">
+        {% csrf_token %}
+        <input id="first-name" type="text" placeholder="First name" name="first-name">
+        <input id="last-name" type="text" placeholder="Last name" name="last-name">
+        <input id="username" type="text" placeholder="Username" name="username">
+
+        <label for="university">University</label>
+        <select id="university" name="university">
+            <option value="">---------</option>
+            {% for university in universities %}
+            <option value="{{ university.id }}">{{ university.university }}</option>
+            {% endfor %}
+        </select>
+        <label for="school">School</label>
+        <select id="school" name="school">
+            <option value="">---------</option>
+        </select>
+        <label for="program">Program</label>
+        <select id="program" name="program">
+            <option value="">---------</option>
+        </select>
+
+        <input id="password" type="password" placeholder="Password" name="password">
+
+        <button type="submit" id="reg-button">Submit</button>
+    </form>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'slides/register.js' %}"></script>
+{% endblock %}
