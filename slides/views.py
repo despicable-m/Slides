@@ -5,13 +5,22 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.db import IntegrityError
 from django.views.decorators.csrf import csrf_exempt
+from datetime import datetime
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
 import json
+import os
 
-from .models import User, University, School, Program, Level, Course
+from .models import User, University, School, Program, Level, Course, Document
 
+
+dt = datetime.now()
+d = dt.date()
+t = dt.strftime("%H:%M:%S")
 
 # Create your views here.
 def index(request):
+    """ App homepage """
     if request.user.is_authenticated:
         return HttpResponse("Welcome")
     else:
@@ -19,7 +28,9 @@ def index(request):
 
 
 def register(request):
+    """ User registration view """
     if request.method == "POST":
+        # Works when post data is being received via AJAX
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
             data = json.loads(request.body)
             the_id = data['id']
@@ -49,6 +60,7 @@ def register(request):
                 print(level_dict)
                 return JsonResponse({"levels":level_dict})
         else:
+            # When form is submitted
             username = request.POST["username"]
             first_name = request.POST["first-name"]
             last_name = request.POST["last-name"]
@@ -58,6 +70,7 @@ def register(request):
             level = Level.objects.get(pk=request.POST["level"])
             password = request.POST["password"]
 
+            # Tries registering user
             try:
                 user = User.objects.create_user(username,
                 first_name=first_name, last_name=last_name,
@@ -65,7 +78,9 @@ def register(request):
                 program=program, level=level, password=password)
                 user.save()
             except IntegrityError:
-                print("Integrity error")
+                return render(request, "slides/register.html", {
+                "message":"Invalid username and/or password."
+                })
             login(request, user)
             return HttpResponseRedirect(reverse("index"))
     universities = University.objects.all()
@@ -75,11 +90,15 @@ def register(request):
 
 
 def login_view(request):
+    """ User login view """
     if request.method == "POST":
+
+        # Attempts signing user in
         username = request.POST["username"]
         password = request.POST["password"]
         user = authenticate(request, username=username, password=password)
 
+        # Checks if authentication is sucessful
         if user is not None:
             login(request, user)
             return HttpResponseRedirect(reverse("index"))
@@ -92,16 +111,33 @@ def login_view(request):
 
 
 def logout_view(request):
+    """ Logs out user """
     logout(request)
     return HttpResponseRedirect(reverse("index"))
 
 
 def upload(request):
-    
-    courses = Course.objects.filter(
-        level__user__program=request.user.program,
-        level__user__university=request.user.university,
-        level__user__school=request.user.school)
+    """ Let's user upload files """
+    if request.method == "POST":
+        date = d
+        time = t
+        user = request.user
+        the_file = request.FILES["uploaded-file"]
+        topic = request.POST["topic"]
+        course = Course.objects.get(pk=request.POST["course"])
+
+        fs = FileSystemStorage()
+        location = '{0}/{1}/{2}/{3}/{4}/{5}/{6}'.format(
+            user.level.year, user.university.university, user.school.school, 
+            user.program.program, user.level.level, course.course, the_file.name)
+
+        Document.objects.create(user=user,
+        university=user.university, school=user.school, program=user.program,
+        course=course, topic=topic, location=location, date=d, time=t, document=the_file)
+
+        return render(request, 'slides/upload.html')
+
+    courses = Course.objects.filter(level=request.user.level)
 
     return render(request, "slides/upload.html", {
         "courses":courses

@@ -82,6 +82,8 @@ DATABASES = {
 }
 
 AUTH_USER_MODEL = "slides.User"
+MEDIA_URL = "/document/"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'document')
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
