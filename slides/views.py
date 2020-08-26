@@ -10,6 +10,7 @@ from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 import json
 import os
+from pathlib import Path
 
 from .models import User, University, School, Program, Level, Course, Document
 
@@ -22,7 +23,11 @@ t = dt.strftime("%H:%M:%S")
 def index(request):
     """ App homepage """
     if request.user.is_authenticated:
-        return HttpResponse("Welcome")
+        documents = Document.objects.all()
+        
+        return render(request, "slides/index.html", {
+            "documents":documents
+        })
     else:
         return HttpResponseRedirect(reverse('login'))
 
@@ -119,21 +124,19 @@ def logout_view(request):
 def upload(request):
     """ Let's user upload files """
     if request.method == "POST":
-        date = d
-        time = t
         user = request.user
         the_file = request.FILES["uploaded-file"]
+        file_name = request.FILES["uploaded-file"].name
         topic = request.POST["topic"]
         course = Course.objects.get(pk=request.POST["course"])
 
-        fs = FileSystemStorage()
-        location = '{0}/{1}/{2}/{3}/{4}/{5}/{6}'.format(
+        slug = Path('{0}/{1}/{2}/{3}/{4}/{5}'.format(
             user.level.year, user.university.university, user.school.school, 
-            user.program.program, user.level.level, course.course, the_file.name)
+            user.program.program, user.level.level, course.course))
 
         Document.objects.create(user=user,
         university=user.university, school=user.school, program=user.program,
-        course=course, topic=topic, location=location, date=d, time=t, document=the_file)
+        course=course, topic=topic, slug=slug, file_name=file_name, date=d, time=t, document=the_file)
 
         return render(request, 'slides/upload.html')
 

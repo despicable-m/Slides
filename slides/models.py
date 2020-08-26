@@ -60,16 +60,8 @@ class User(AbstractUser):
         {self.level}"
 
 
-# def upload_path_handler(user, filename):
-#     return '{0}/{1}/{2}/{3}/{4}/{5}'.format(
-#             user.level.year, user.university.university, user.school.school, 
-#             user.program.program, user.level.level, filename)
-
-
-# class Document(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     the_file = models.FileField(upload_to=upload_path_handler)
-
+def add_path(instance, filename):
+    return f'{instance.slug}/{filename}'
 
 class Document(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -80,15 +72,10 @@ class Document(models.Model):
     topic = models.CharField(max_length=255)
     date = models.DateField()
     time = models.TimeField()
-    location = models.CharField(max_length=255)
+    slug = models.CharField(max_length=255)
+    file_name = models.CharField(max_length=256, default="something.jpg")
 
-    def location_string(self):
-        return self.location
-    document = models.FileField(upload_to=location)
-
-    def save(self, *args, **kwargs):
-        self.document = self.location_string()
-        super(Document, self).save(*args, **kwargs)
+    document = models.FileField(upload_to=add_path)
 
     def __str__(self):
         return f"{self.document}"
