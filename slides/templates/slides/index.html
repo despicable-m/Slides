@@ -5,12 +5,69 @@
 {% block title %} Home {% endblock %}
 
 {% block body %}
-    {% for document in documents %}
-    <div class="container">
-        <div id="topic">{{ document.topic }}</div>
-        <div id="filename"> {{ document.file_name }}</div>
-        <div id="size"> {{ document.document.size|sizify}}</div>
-        <div url><a href="{{ document.document.url}}"> Download </a></div>
+    <div id="page">
+        <!-- Search area -->
+        <div id="search">
+            <input type="text" id="search-field" placeholder="search here">
+        </div>
+
+        <!-- Latest posts -->
+        <div class="section-container">
+            <div id="section-label">
+                <p id="label-text">Latest Uploads</p>
+            </div>
+            <div id="latest-uploads">
+                {% for document in documents %}
+                <div class="container">
+                    <div id="topic">{{ document.topic }}</div>
+                    <div id="filename"> {{ document.file_name }}</div>
+                    <div id="size"> {{ document.document.size|sizify}}</div>
+                    <div url><a href="{{ document.document.url}}"> Download </a></div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- All courses available to user -->
+        <div class="section-container">
+            <div id="section-label">
+                <p id="label-text">Courses</p>
+            </div>
+            <div id="courses">
+                {% for course in courses %}
+                <div class="container">
+                    <p>{{ course.course }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-    {% endfor %}
+
+    <!-- All courses under user's program -->
+    <div class="section-container">
+        <div id="section-label">
+            <p id="label-text">{{ user.program.program }}</p>
+        </div>
+        <select id="year">
+            {% for year in years %}
+            <option value="{{ year.year }}">{{ year.year }}</option>
+            {% endfor %}
+        </select>
+        <div id="levels">
+            
+            <div class="container">
+            {% for level in levels %}    
+                <button data-id="{{ level.id }}" class="levels">{{ level.level }}</button>
+            {% endfor %}
+            </div>
+            
+        </div>
+    </div>
+
 {% endblock %}
+
+{% block script %}
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script type="text/babel" src="{% static 'slides/src/index.js' %}"></script>
+{% endblock %}
+

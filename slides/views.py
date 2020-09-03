@@ -23,10 +23,23 @@ t = dt.strftime("%H:%M:%S")
 def index(request):
     """ App homepage """
     if request.user.is_authenticated:
-        documents = Document.objects.all()
+        if request.method == "POST":
+            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                data = json.loads(request.body)
+                print(data)
+    
+        documents = Document.objects.all().order_by("-id")
+        years = Level.objects.filter(program=request.user.program,
+                                    level=request.user.level.level)
+        levels = Level.objects.filter(program=request.user.program)
         
+        courses = Course.objects.filter(level=request.user.level).order_by("course")
         return render(request, "slides/index.html", {
-            "documents":documents
+            "documents":documents,
+            "courses":courses,
+            "user":request.user,
+            "years":years,
+            "levels":levels
         })
     else:
         return HttpResponseRedirect(reverse('login'))

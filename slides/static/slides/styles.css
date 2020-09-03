@@ -9,4 +9,9 @@
   margin: 5px;
 }
 
+#latest-uploads {
+  display: flex;
+  flex-direction: row;
+}
+
 /*# sourceMappingURL=styles.css.map */
