@@ -1,3 +1,25 @@
+.over-flower, #latest-uploads .container-latest {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.basic-container, #levels .container-levels, .section-container #courses .container-courses, #latest-uploads .container-latest {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  font-family: Segoe UI, Frutiger, Frutiger Linotype, Dejavu Sans, Helvetica Neue, Arial, sans-serif;
+  padding: 5px;
+}
+
+.label-text, .section-container #section-label {
+  font-family: Segoe UI, Frutiger, Frutiger Linotype, Dejavu Sans, Helvetica Neue, Arial, sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  color: #707070;
+}
+
 .slides-form {
   display: flex;
   flex-direction: column;
@@ -12,6 +34,96 @@
 #latest-uploads {
   display: flex;
   flex-direction: row;
+}
+#latest-uploads .container-latest {
+  margin: 5px;
+  margin-right: 30px;
+  width: 228px;
+  height: 82px;
+}
+#latest-uploads .container-latest #topic {
+  font-weight: bold;
+  font-size: 20px;
+  color: #707070;
+}
+#latest-uploads .container-latest .download-size {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.section-container #courses {
+  display: flex;
+  flex-direction: row;
+}
+.section-container #courses .container-courses {
+  display: flex;
+  flex-direction: row;
+  width: 154px;
+  height: 52px;
+  margin: 5px;
+  margin-right: 40px;
+}
+.section-container #courses .container-courses .image-cont {
+  min-width: 46px;
+  max-width: 46px;
+  height: 41px;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 5px;
+}
+.section-container #courses .container-courses .image-cont img {
+  width: 100%;
+  height: auto;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+.section-container #courses .container-courses p {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.program-year {
+  display: flex;
+  flex-direction: row;
+}
+.program-year #section-label {
+  margin-right: 10px;
+}
+.program-year #year {
+  height: 25px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+#levels {
+  display: flex;
+  flex-direction: row;
+}
+#levels .container-levels {
+  width: 70px;
+  height: 26px;
+  display: flex;
+  direction: row;
+  margin-right: 20px;
+}
+#levels .container-levels .levels {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+#levels .container-levels .level-image {
+  min-width: 20px;
+  max-width: 20px;
+  height: 20px;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 5px;
+}
+#levels .container-levels .level-image img {
+  width: 100%;
+  height: auto;
+  flex-grow: 0;
+  flex-shrink: 0;
 }
 
 /*# sourceMappingURL=styles.css.map */

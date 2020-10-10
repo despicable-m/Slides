@@ -20,29 +20,102 @@ d = dt.date()
 t = dt.strftime("%H:%M:%S")
 
 # Create your views here.
+
 def index(request):
     """ App homepage """
     if request.user.is_authenticated:
         if request.method == "POST":
             if request.headers.get('x-requested-with') == 'XMLHttpRequest':
                 data = json.loads(request.body)
-                print(data)
-    
-        documents = Document.objects.all().order_by("-id")
-        years = Level.objects.filter(program=request.user.program,
-                                    level=request.user.level.level)
-        levels = Level.objects.filter(program=request.user.program)
-        
+                
+                # Gets the level and returns all courses in that level
+                db_courses = Course.objects.filter(level=request.user.level).order_by("course")
+                courses = list()
+                for course in db_courses:
+                    item ={"id":course.id, "course":course.course}
+                    courses.append(item)
+
+                return JsonResponse({"courses":courses})
+
         courses = Course.objects.filter(level=request.user.level).order_by("course")
+        user = request.user
+        documents = Document.objects.all().order_by("-id")
+        levels = Level.objects.filter(program=request.user.program)
+        years = Level.objects.filter(program=request.user.program,
+                                level=request.user.level.level)
+
         return render(request, "slides/index.html", {
-            "documents":documents,
             "courses":courses,
-            "user":request.user,
-            "years":years,
-            "levels":levels
+            "user": user,
+            "documents":documents,
+            "levels":levels,
+            "years":years
         })
     else:
         return HttpResponseRedirect(reverse('login'))
+
+
+def data_get(request):
+    documents = Document.objects.all().order_by("-id")
+    docs = list()
+    for document in documents:
+        item = {"id":document.id, "topic":document.topic, "filename":document.file_name,
+                "size":document.document.size, "url":document.document.url}
+        docs.append(item)
+
+    db_courses = Course.objects.filter(level=request.user.level).order_by("course")
+    courses = list()
+    for course in db_courses:
+        item ={"id":course.id, "course":course.course}
+        courses.append(item)
+
+    db_years = Level.objects.filter(program=request.user.program,
+                                level=request.user.level.level)
+    years =  list()
+    for year in db_years:
+        item = {"id":year.id, "year":year.year}
+        years.append(item)
+
+    db_levels = Level.objects.filter(program=request.user.program)
+    levels = list()
+    for level in db_levels:
+        item = {"id":level.id, "level":level.level}
+        levels.append(item)
+
+    program = request.user.program.program
+    
+    return JsonResponse({
+        "documents":docs,
+        "courses":courses,
+        "levels":levels,
+        "years":years,
+        "program":program
+    })
+
+
+def fetch(request, info):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            data = json.loads(request.body)
+            if info == 'course':           
+                # Gets the level and returns all courses in that level
+                level = Level.objects.get(pk=data['id'])
+                db_courses = Course.objects.filter(level=level).order_by("course")
+                courses = list()
+                for course in db_courses:
+                    item ={"id":course.id, "course":course.course}
+                    courses.append(item)
+                return JsonResponse({"courses":courses})
+
+            elif info == 'document':
+                course = Course.objects.get(pk=data['id'])
+                db_documents = Document.objects.filter(course=course).order_by("-id")
+                documents = list()
+                for document in db_documents:
+                    item = {"id":document.id, "topic":document.topic, "filename":document.file_name,
+                            "size":document.document.size, "url":document.document.url}
+                    documents.append(item)
+                return JsonResponse({"documents":documents})
 
 
 def register(request):

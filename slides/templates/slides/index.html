@@ -4,25 +4,38 @@
 
 {% block title %} Home {% endblock %}
 
+{% block scripthead %}
+    <script src="{% static 'slides/index.js' %}"></script>
+{% endblock %}
+
 {% block body %}
-    <div id="page">
+    <div>
         <!-- Search area -->
         <div id="search">
-            <input type="text" id="search-field" placeholder="search here">
+            <input type="search" id="search-field" placeholder="search here">
+            <button type="submit" id="search-button">Search</button>
+        </div>
+
+        <!-- Announcements -->
+        <div id="announcements">
+            
         </div>
 
         <!-- Latest posts -->
         <div class="section-container">
             <div id="section-label">
-                <p id="label-text">Latest Uploads</p>
+                <p class="label-text">Latest Uploads</p>
             </div>
             <div id="latest-uploads">
                 {% for document in documents %}
-                <div class="container">
+                <div class="container-latest">
                     <div id="topic">{{ document.topic }}</div>
                     <div id="filename"> {{ document.file_name }}</div>
-                    <div id="size"> {{ document.document.size|sizify}}</div>
-                    <div url><a href="{{ document.document.url}}"> Download </a></div>
+                    <div class="download-size">
+                        <div id="size"> {{ document.document.size|sizify}}</div>
+                        <div url><a href="{{ document.document.url }}" style="text-decoration: none;"> Download </a></div>
+                    </div>
+                    
                 </div>
                 {% endfor %}
             </div>
@@ -31,11 +44,14 @@
         <!-- All courses available to user -->
         <div class="section-container">
             <div id="section-label">
-                <p id="label-text">Courses</p>
+                <p class="label-text">Courses</p>
             </div>
             <div id="courses">
                 {% for course in courses %}
-                <div class="container">
+                <div data-course_id="{{ course.id }}" class="container-courses">
+                    <div  class="image-cont">
+                        <img src="{% static 'slides/assets/folder.png' %}">
+                    </div>
                     <p>{{ course.course }}</p>
                 </div>
                 {% endfor %}
@@ -45,29 +61,33 @@
 
     <!-- All courses under user's program -->
     <div class="section-container">
-        <div id="section-label">
-            <p id="label-text">{{ user.program.program }}</p>
+        <div class="program-year">
+            <div id="section-label">
+                <p class="label-text">{{ user.program.program }}</p>
+            </div>
+            <select id="year">
+                {% for year in years %}
+                <option value="{{ year.year }}">{{ year.year }}</option>
+                {% endfor %}
+            </select>
         </div>
-        <select id="year">
-            {% for year in years %}
-            <option value="{{ year.year }}">{{ year.year }}</option>
-            {% endfor %}
-        </select>
+        
         <div id="levels">
             
-            <div class="container">
-            {% for level in levels %}    
-                <button data-id="{{ level.id }}" class="levels">{{ level.level }}</button>
-            {% endfor %}
+            {% for level in levels %}  
+            <div class="container-levels">
+                <div class="level-image">
+                    <img src="{% static 'slides/assets/graduated.png' %}">
+                </div>
+                <p data-id="{{ level.id }}" class="levels">L{{ level.level }}</p>
             </div>
-            
+            {% endfor %}
         </div>
     </div>
 
 {% endblock %}
 
 {% block script %}
-        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-        <script type="text/babel" src="{% static 'slides/src/index.js' %}"></script>
+
 {% endblock %}
 
