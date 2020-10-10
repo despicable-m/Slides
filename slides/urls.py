@@ -1,5 +1,5 @@
+"""urls for slides"""
 from django.urls import path
-
 from . import views
 
 urlpatterns = [

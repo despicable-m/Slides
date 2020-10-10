@@ -1,16 +1,16 @@
+""" Views """
+# import os
+import json
+from pathlib import Path
+from datetime import datetime
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.db import IntegrityError
-from django.views.decorators.csrf import csrf_exempt
-from datetime import datetime
-from django.conf import settings
-from django.core.files.storage import FileSystemStorage
-import json
-import os
-from pathlib import Path
+# from django.views.decorators.csrf import csrf_exempt
+# from django.core.files.storage import FileSystemStorage
 
 from .models import User, University, School, Program, Level, Course, Document
 
@@ -26,13 +26,12 @@ def index(request):
     if request.user.is_authenticated:
         if request.method == "POST":
             if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-                data = json.loads(request.body)
-                
+                # data = json.loads(request.body)
                 # Gets the level and returns all courses in that level
                 db_courses = Course.objects.filter(level=request.user.level).order_by("course")
                 courses = list()
                 for course in db_courses:
-                    item ={"id":course.id, "course":course.course}
+                    item = {"id":course.id, "course":course.course}
                     courses.append(item)
 
                 return JsonResponse({"courses":courses})
@@ -42,7 +41,7 @@ def index(request):
         documents = Document.objects.all().order_by("-id")
         levels = Level.objects.filter(program=request.user.program)
         years = Level.objects.filter(program=request.user.program,
-                                level=request.user.level.level)
+                                     level=request.user.level.level)
 
         return render(request, "slides/index.html", {
             "courses":courses,
@@ -55,7 +54,9 @@ def index(request):
         return HttpResponseRedirect(reverse('login'))
 
 
+@login_required
 def data_get(request):
+    """ Sends data to the frontend """
     documents = Document.objects.all().order_by("-id")
     docs = list()
     for document in documents:
@@ -66,12 +67,13 @@ def data_get(request):
     db_courses = Course.objects.filter(level=request.user.level).order_by("course")
     courses = list()
     for course in db_courses:
-        item ={"id":course.id, "course":course.course}
+        item = {"id":course.id, "course":course.course}
         courses.append(item)
 
     db_years = Level.objects.filter(program=request.user.program,
-                                level=request.user.level.level)
-    years =  list()
+                                    level=request.user.level.level)
+
+    years = list()
     for year in db_years:
         item = {"id":year.id, "year":year.year}
         years.append(item)
@@ -83,7 +85,6 @@ def data_get(request):
         levels.append(item)
 
     program = request.user.program.program
-    
     return JsonResponse({
         "documents":docs,
         "courses":courses,
@@ -94,16 +95,17 @@ def data_get(request):
 
 
 def fetch(request, info):
+    """ Sends specific requested data to the frontend """
     if request.user.is_authenticated:
         if request.method == "POST":
             data = json.loads(request.body)
-            if info == 'course':           
+            if info == 'course':
                 # Gets the level and returns all courses in that level
                 level = Level.objects.get(pk=data['id'])
                 db_courses = Course.objects.filter(level=level).order_by("course")
                 courses = list()
                 for course in db_courses:
-                    item ={"id":course.id, "course":course.course}
+                    item = {"id":course.id, "course":course.course}
                     courses.append(item)
                 return JsonResponse({"courses":courses})
 
@@ -147,7 +149,6 @@ def register(request):
                 level_dict = dict()
                 for level in levels:
                     level_dict[level.id] = level.level
-                
                 print(level_dict)
                 return JsonResponse({"levels":level_dict})
         else:
@@ -164,13 +165,17 @@ def register(request):
             # Tries registering user
             try:
                 user = User.objects.create_user(username,
-                first_name=first_name, last_name=last_name,
-                university=university, school=school,
-                program=program, level=level, password=password)
+                                                first_name=first_name,
+                                                last_name=last_name,
+                                                university=university,
+                                                school=school,
+                                                program=program,
+                                                level=level,
+                                                password=password)
                 user.save()
             except IntegrityError:
                 return render(request, "slides/register.html", {
-                "message":"Invalid username and/or password."
+                    "message":"Invalid username and/or password."
                 })
             login(request, user)
             return HttpResponseRedirect(reverse("index"))
@@ -217,17 +222,28 @@ def upload(request):
         course = Course.objects.get(pk=request.POST["course"])
 
         slug = Path('{0}/{1}/{2}/{3}/{4}/{5}'.format(
-            user.level.year, user.university.university, user.school.school, 
-            user.program.program, user.level.level, course.course))
+            user.level.year,
+            user.university.university,
+            user.school.school,
+            user.program.program,
+            user.level.level,
+            course.course))
 
         Document.objects.create(user=user,
-        university=user.university, school=user.school, program=user.program,
-        course=course, topic=topic, slug=slug, file_name=file_name, date=d, time=t, document=the_file)
+                                university=user.university,
+                                school=user.school,
+                                program=user.program,
+                                course=course,
+                                topic=topic,
+                                slug=slug,
+                                file_name=file_name,
+                                date=d,
+                                time=t,
+                                document=the_file)
 
         return render(request, 'slides/upload.html')
 
     courses = Course.objects.filter(level=request.user.level)
-
     return render(request, "slides/upload.html", {
         "courses":courses
     })
