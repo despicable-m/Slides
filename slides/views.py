@@ -5,7 +5,7 @@ from pathlib import Path
 from datetime import datetime
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.db import IntegrityError
@@ -94,6 +94,7 @@ def data_get(request):
     })
 
 
+@login_required
 def fetch(request, info):
     """ Sends specific requested data to the frontend """
     if request.user.is_authenticated:
@@ -212,6 +213,7 @@ def logout_view(request):
     return HttpResponseRedirect(reverse("index"))
 
 
+@login_required
 def upload(request):
     """ Let's user upload files """
     if request.method == "POST":
@@ -245,5 +247,26 @@ def upload(request):
 
     courses = Course.objects.filter(level=request.user.level)
     return render(request, "slides/upload.html", {
+        "courses":courses
+    })
+
+
+@login_required
+def course(request, course_id):
+    """ Let's user access a particular course's materials """
+    documents = Document.objects.filter(course=course_id)
+    course = Course.objects.get(pk=course_id)
+    return render(request, "slides/course.html", {
+        "documents": documents,
+        "user": request.user,
+        "course":course
+    })
+
+
+@login_required
+def program(request, program_id):
+    """ Let's user access particular program's courses """
+    courses = Course.objects.filter(level=program_id)
+    return render(request, "slides/program.html", {
         "courses":courses
     })

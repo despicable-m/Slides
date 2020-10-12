@@ -1,6 +1,8 @@
 // Variables and extensions
 $font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; 
 $box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+$accent-color: #BB8900;
+
 .over-flower {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -16,6 +18,15 @@ $box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     font-family: $font-family;
     padding: 5px;
     
+}
+
+body {
+    padding: 0px;
+    margin: 0px;
+}
+
+.body {
+    margin: 20px;
 }
 
 //labels
@@ -45,6 +56,34 @@ $box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 
     input, select, label{
         margin: 5px;
+    }
+}
+
+#search {
+    display: flex;
+    justify-content: center;
+
+    #search-field {
+        width: 650px;
+        height: 30px;
+        border: 1px solid #D4D4D4;
+        border-radius: 5px;
+        margin-right: 5px;
+        font-family: $font-family;
+        font-size: 15px;
+        padding-left: 10px;
+    }
+
+    #search-button {
+        width: 67px;
+        height: 30px;
+        background-color: $accent-color;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        margin-left: 5px;
+        font-family: $font-family;
+        font-size: 15px;
     }
 }
 
@@ -109,6 +148,7 @@ $box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
             p {
                 margin-top: auto;
                 margin-bottom: auto;
+                color: black;
             }
         }
     }
@@ -159,7 +199,40 @@ $box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
                 flex-grow:0;
                 flex-shrink:0;
             }
-            
+        }
+
+        p {
+            color: black;
+        }
+    }
+}
+
+.menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    height: 40px;
+    background-color: $accent-color;
+    overflow: hidden;
+
+    li {
+        display: inline;
+        float: left;
+
+        a {
+            display: block;
+            padding: 8px;
+            text-decoration: none;
+            color: white;
+            width: 40px;
+            text-align: center;
+            padding: 14px 16px;
+            font-family: $font-family;
+        }
+        a:hover {
+            background-color: #644900;
         }
     }
 }

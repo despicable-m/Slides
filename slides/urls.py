@@ -9,5 +9,7 @@ urlpatterns = [
     path("logout", views.logout_view, name="logout"),
     path("upload", views.upload, name="upload"),
     path("data_get", views.data_get, name="data_get"),
-    path("fetch/<info>", views.fetch, name="fetch")
+    path("fetch/<info>", views.fetch, name="fetch"),
+    path("course/<course_id>", views.course, name="course"),
+    path("program/<program_id>", views.program, name="program")
 ]

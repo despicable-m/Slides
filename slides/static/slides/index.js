@@ -34,10 +34,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 })
             }).then(function (response) {
                 return response.json();
-            }).then(function (json) {console.log(json)});
+            }).then(function (json) {
+                return createDownloadable(json.documents)
+            });
         }
     })
-
-        
-
 });
+
+function createDownloadable(data) {
+    console.log(data[0].topic)    
+}

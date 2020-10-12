@@ -12,7 +12,7 @@
     <div>
         <!-- Search area -->
         <div id="search">
-            <input type="search" id="search-field" placeholder="search here">
+            <input type="search" id="search-field" placeholder="Type search term here">
             <button type="submit" id="search-button">Search</button>
         </div>
 
@@ -48,12 +48,15 @@
             </div>
             <div id="courses">
                 {% for course in courses %}
-                <div data-course_id="{{ course.id }}" class="container-courses">
-                    <div  class="image-cont">
-                        <img src="{% static 'slides/assets/folder.png' %}">
+                <a href="/course/{{ course.id }}" style="text-decoration: none;">
+                    <div data-course_id="{{ course.id }}" class="container-courses">
+                        <div  class="image-cont">
+                            <img src="{% static 'slides/assets/folder.png' %}">
+                        </div>
+                        <p>{{ course.course }}</p>
                     </div>
-                    <p>{{ course.course }}</p>
-                </div>
+                </a>
+                
                 {% endfor %}
             </div>
         </div>
@@ -65,22 +68,20 @@
             <div id="section-label">
                 <p class="label-text">{{ user.program.program }}</p>
             </div>
-            <select id="year">
-                {% for year in years %}
-                <option value="{{ year.year }}">{{ year.year }}</option>
-                {% endfor %}
-            </select>
         </div>
         
         <div id="levels">
             
-            {% for level in levels %}  
-            <div class="container-levels">
-                <div class="level-image">
-                    <img src="{% static 'slides/assets/graduated.png' %}">
+            {% for level in levels %}
+            <a href="/program/{{ level.id}}" style="text-decoration: none;">
+                <div class="container-levels">
+                    <div class="level-image">
+                        <img src="{% static 'slides/assets/graduated.png' %}">
+                    </div>
+                    <p data-id="{{ level.id }}" class="levels">L{{ level.level }}</p>
                 </div>
-                <p data-id="{{ level.id }}" class="levels">L{{ level.level }}</p>
-            </div>
+            </a>  
+            
             {% endfor %}
         </div>
     </div>

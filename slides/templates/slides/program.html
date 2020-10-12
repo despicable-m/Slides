@@ -1,0 +1,41 @@
+{% extends "slides/layout.html" %}
+{% load static %}
+{% load custom_template_tags %}
+
+{% block title %} Home {% endblock %}
+
+{% block scripthead %}
+    <script src="{% static 'slides/index.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+    <div>
+
+        <!-- All courses available to user -->
+        <div class="section-container">
+            <div id="section-label">
+                <p class="label-text">Courses</p>
+            </div>
+            <div id="courses">
+                {% for course in courses %}
+                <a href="/course/{{ course.id }}" style="text-decoration: none;">
+                    <div data-course_id="{{ course.id }}" class="container-courses">
+                        <div  class="image-cont">
+                            <img src="{% static 'slides/assets/folder.png' %}">
+                        </div>
+                        <p>{{ course.course }}</p>
+                    </div>
+                </a>
+                
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
+
