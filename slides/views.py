@@ -12,7 +12,7 @@ from django.db import IntegrityError
 # from django.views.decorators.csrf import csrf_exempt
 # from django.core.files.storage import FileSystemStorage
 
-from .models import User, University, School, Program, Level, Course, Document
+from .models import User, University, School, Program, Level, Course, Document, Announcement
 
 
 dt = datetime.now()
@@ -42,13 +42,15 @@ def index(request):
         levels = Level.objects.filter(program=request.user.program)
         years = Level.objects.filter(program=request.user.program,
                                      level=request.user.level.level)
+        announcements = Announcement.objects.all()
 
         return render(request, "slides/index.html", {
             "courses":courses,
             "user": user,
             "documents":documents,
             "levels":levels,
-            "years":years
+            "years":years,
+            "announcements":announcements
         })
     else:
         return HttpResponseRedirect(reverse('login'))

@@ -11,20 +11,28 @@
     </head>
 
     <body>
-        <ul class="menu">
-            <li><a href="{% url 'index' %}">Home</a></li>
-            <li><a href="{% url 'upload' %}">Upload</a></li>
-            <li style="float: right;"><a href="#">Logout</a></li>
-        </ul>
+        
+        <div id="page">
+
+            <ul class="menu">
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'upload' %}">Upload</a></li>
+                <li><a href="#">Announce</a></li>
+                <li style="float: right;"><a href="#">Logout</a></li>
+            </ul>
 
 
-        <div class="body">
-            {% block body %}
-            {% endblock %}
+            <div class="body">
+                {% block body %}
+                {% endblock %}
+            </div>
+
+            <div class="footer">
+
+            </div>
         </div>
-
+    
+    </body>
         {% block script %}
         {% endblock %}
-    </body>
-
 </html>

@@ -18,7 +18,21 @@
 
         <!-- Announcements -->
         <div id="announcements">
-            
+            <div id="section-label">
+                <p class="label-text">Announcements</p>
+            </div>
+            <div id="announcement-area">
+                {% for announcement in announcements %}
+                    <div class="container-announcements">
+                        <div class="title">{{ announcement.title }}</div>
+                        <div class="announcement">{{ announcement.announcement }}</div>
+                        <div class="expander">
+                            <a href="#">Expand</a>
+                        </div>
+                    </div>
+                    
+                {% endfor %}
+            </div>
         </div>
 
         <!-- Latest posts -->
