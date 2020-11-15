@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
+from django.db.models import Q
 from django.db import IntegrityError
 # from django.views.decorators.csrf import csrf_exempt
 # from django.core.files.storage import FileSystemStorage
@@ -271,4 +272,48 @@ def program(request, program_id):
     courses = Course.objects.filter(level=program_id)
     return render(request, "slides/program.html", {
         "courses":courses
+    })
+
+
+@login_required
+def announce(request):
+    """ Let's make announcements """
+    if request.method == "POST":
+        user = request.user
+        title = request.POST["announce-title"]
+        announcement = request.POST["announce-compose"]
+        print(user, title, announcement)
+
+        Announcement.objects.create(user=user,
+                                    title=title,
+                                    announcement=announcement)
+        return HttpResponseRedirect(reverse('index'))
+
+    return render(request, "slides/announce.html")
+
+@login_required
+def announcement(request, a_id):
+    """" Let's user view full announcement """
+    announcement = Announcement.objects.get(pk=a_id)
+
+    return render(request, "slides/announcement.html", {
+        "announcement": announcement
+    })
+
+
+@login_required
+def search(request):
+    """ Displays serach results to user """
+    query = request.GET.get('q')
+    courses = Course.objects.filter(
+                                    Q(course_code__icontains=query) | Q(course__icontains=query)
+                                    ).order_by("course")
+    documents = Document.objects.filter(
+                                        Q(topic__icontains=query) | Q(file_name__icontains=query)
+                                        ).order_by("-id")
+    announcements = Announcement.objects.filter(Q(title__icontains=query) | Q(announcement__icontains=query))
+    return render(request, "slides/search.html", {
+        "courses":courses,
+        "documents":documents,
+        "announcements":announcements
     })

@@ -1,0 +1,136 @@
+.label-plus {
+  display: flex;
+  flex-direction: column;
+}
+
+.basic-select, #register-container .register-form #pro-lev #program, #register-container .register-form #pro-lev #level, #register-container .register-form #uni-sch #university, #register-container .register-form #uni-sch #school {
+  height: 35px;
+  color: #333333;
+  background-color: #eeeeee;
+  border: 1px solid #dddddd;
+  cursor: pointer;
+  border-radius: 5px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="50"><polygon points="0,0 100,0 50,50" style="fill:%23666666;" /></svg>');
+  background-position: right 10px top 50%;
+  background-repeat: no-repeat;
+  background-size: 10px;
+  padding-right: 30px;
+}
+
+#register-container {
+  display: flex;
+  width: 560px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 30px;
+}
+#register-container .register-form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+#register-container .register-form .register-labels {
+  color: #707070;
+  font-family: Segoe UI, Frutiger, Frutiger Linotype, Dejavu Sans, Helvetica Neue, Arial, sans-serif;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+#register-container .register-form #personal-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+#register-container .register-form #personal-details #first-name, #register-container .register-form #personal-details #last-name, #register-container .register-form #personal-details #username {
+  height: 30px;
+  border: 1px solid #D4D4D4;
+  border-radius: 5px;
+  font-family: Segoe UI, Frutiger, Frutiger Linotype, Dejavu Sans, Helvetica Neue, Arial, sans-serif;
+  font-size: 15px;
+  padding-left: 10px;
+}
+#register-container .register-form #uni-sch {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+#register-container .register-form #uni-sch #university, #register-container .register-form #uni-sch #school {
+  width: 260px;
+}
+#register-container .register-form #pro-lev {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+#register-container .register-form #pro-lev #program, #register-container .register-form #pro-lev #level {
+  width: 260px;
+}
+#register-container .register-form #passwords {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+#register-container .register-form #passwords #password, #register-container .register-form #passwords #c-password {
+  height: 30px;
+  border: 1px solid #D4D4D4;
+  border-radius: 5px;
+  font-family: Segoe UI, Frutiger, Frutiger Linotype, Dejavu Sans, Helvetica Neue, Arial, sans-serif;
+  font-size: 15px;
+  padding-left: 10px;
+  width: 250px;
+}
+#register-container .register-form #button-container button {
+  background-color: #BB8900;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-family: Segoe UI, Frutiger, Frutiger Linotype, Dejavu Sans, Helvetica Neue, Arial, sans-serif;
+  font-size: 15px;
+  height: 35px;
+  width: 80px;
+  margin-top: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  #register-container {
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #register-container .register-form {
+    justify-content: center;
+  }
+  #register-container .register-form #personal-details {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 260px;
+  }
+  #register-container .register-form #uni-sch {
+    flex-direction: column;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  #register-container .register-form #pro-lev {
+    flex-direction: column;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  #register-container .register-form #passwords {
+    flex-direction: column;
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+}
+
+/*# sourceMappingURL=register.css.map */

@@ -1,0 +1,27 @@
+{% extends "slides/layout.html" %}
+{% load static %}
+{% load custom_template_tags %}
+
+{% block title %} {{ announcement.title }} {% endblock %}
+
+{% block scripthead %}
+    <script src="{% static 'slides/index.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+    <!-- Announcements -->
+    <div id="announcements">
+        <div id="section-label">
+            <p class="label-text">{{ announcement.title }}</p>
+        </div>
+        <div id="announcement-area">
+            <div class="announcement">{{ announcement.announcement }}</div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
+

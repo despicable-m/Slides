@@ -10,20 +10,11 @@
 
 {% block body %}
     <div>
-        <!-- Search area -->
-        <form id="search" action="{% url 'search_results' %}" method="GET">
-            <input name="q" type="search" id="search-field" placeholder="Search...">
-            <button type="submit" id="search-button">Search</button>
-        </form>
-
+        {% if announcements %}
         <!-- Announcements -->
         <div id="announcements">
             <div class="section-label">
                 <p class="label-text">Announcements</p>
-                <span id="arrow-s" class="material-icons">
-                    arrow_forward
-                </span>
-                <button class="view-all">View all</button>
             </div>
             <div id="announcement-area">
                 {% for announcement in announcements %}
@@ -38,52 +29,35 @@
                 {% endfor %}
             </div>
         </div>
+        {% endif %}
 
+        {% if documents %}
         <!-- Latest posts -->
         <div class="section-container">
             <div class="section-label">
                 <p class="label-text">Latest Uploads</p>
-                <span id="arrow-s" class="material-icons">
-                    arrow_forward
-                </span>
-                <button class="view-all">View all</button>
             </div>
             <div id="latest-uploads">
                 {% for document in documents %}
                 <div class="container-latest">
-                    <div>
-                        <div id="topic">{{ document.topic }}</div>
-                        <div id="filename"> {{ document.file_name }}</div> 
-                    </div>
-                    
+                    <div id="topic">{{ document.topic }}</div>
+                    <div id="filename"> {{ document.file_name }}</div>
                     <div class="download-size">
                         <div id="size"> {{ document.document.size|sizify}}</div>
-                        <div id="url"><a href="{{ document.document.url }}" style="text-decoration: none;"> Download </a></div>
+                        <div url><a href="{{ document.document.url }}" style="text-decoration: none;"> Download </a></div>
                     </div>
-                    <a class="downloader" href="{{ document.document.url }}" style="text-decoration: none;">
-                        <span id="file-download" class="material-icons">
-                            cloud_download
-                        </span>
-                    </a>
                     
                 </div>
                 {% endfor %}
             </div>
         </div>
+        {% endif %}
 
+        {% if courses %}
         <!-- All courses available to user -->
         <div class="section-container">
             <div class="section-label">
                 <p class="label-text">Courses</p>
-                <a href="program/{{ user.program.id }}">
-                    <button class="view-all">View all</button>
-                </a>
-                <a href="program/{{ user.program.id }}">
-                    <span id="arrow-s" class="material-icons">
-                        arrow_forward
-                    </span>
-                </a>
-                
             </div>
             <div id="courses">
                 {% for course in courses %}
@@ -99,28 +73,7 @@
                 {% endfor %}
             </div>
         </div>
-    </div>
-
-    <!-- All courses under user's program -->
-    <div class="section-container">
-        <div class="section-label">
-            <p class="label-text">{{ user.program.program }}</p>
-        </div>
-        
-        <div id="levels">
-            
-            {% for level in levels %}
-            <a href="/program/{{ level.id}}" style="text-decoration: none;">
-                <div class="container-levels">
-                    <div class="level-image">
-                        <img src="{% static 'slides/assets/graduated.png' %}">
-                    </div>
-                    <p data-id="{{ level.id }}" class="levels">L{{ level.level }}</p>
-                </div>
-            </a>  
-            
-            {% endfor %}
-        </div>
+        {% endif %}
     </div>
 
 {% endblock %}

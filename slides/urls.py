@@ -11,5 +11,8 @@ urlpatterns = [
     path("data_get", views.data_get, name="data_get"),
     path("fetch/<info>", views.fetch, name="fetch"),
     path("course/<course_id>", views.course, name="course"),
-    path("program/<program_id>", views.program, name="program")
+    path("program/<program_id>", views.program, name="program"),
+    path("announce", views.announce, name="announce"),
+    path("announcement/<a_id>", views.announcement, name="announcement"),
+    path("search", views.search, name="search_results")
 ]

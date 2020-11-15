@@ -1,0 +1,35 @@
+{% extends "slides/layout.html" %}
+{% load static %}
+{% load custom_template_tags %}
+
+{% block title %} Home {% endblock %}
+
+{% block scripthead %}
+    <script src="{% static 'slides/index.js' %}"></script>
+    <link href="{% static 'slides/announce.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <div id="announcer-container">
+        <form id="announce" method="POST" accept="{% url 'announce' %}">
+            {% csrf_token %}
+            <label class="announce-label" for="announce-title">Title</label>
+            <input type="text" id="announce-title" name="announce-title">
+            
+            <label class="announce-label" for="announce-compose">Details</label>
+            <textarea id="announce-compose" name="announce-compose"></textarea>
+
+            <div id="button-container">
+               <button type="submit">Announce</button> 
+            </div>
+            
+        </form>
+    </div>
+    
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
+

@@ -5,15 +5,35 @@
     Login
 {% endblock %}
 
+{% block scripthead %}
+    <link href="{% static 'slides/login.css' %}" rel="stylesheet">
+{% endblock %}
+
 
 {% block body %}
     {% if message %}
         <div class="message">{{ message }}</div>
     {% endif %}
-    <form class="slides-form" action="{% url 'login' %}" method="POST">
-        {% csrf_token %}
-        <input id="username" type="text" placeholder="Username" name="username">
-        <input id="password" type="password" placeholder="Password" name="password">
-        <button type="submit" id="login-button">Login</button>
-    </form>
+    <div id="login-container">
+
+        <form class="login-form" action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            <div class="label-plus">
+                <label class="login-labels" for="username">Username</label>
+                <input id="username" type="text" name="username">
+            </div>
+
+            <div class="label-plus">
+                <label class="login-labels" for="password">Password</label>
+                <input id="password" type="password" name="password">
+            </div>
+            
+            <div id="button-container">
+                <button type="submit" id="login-button">Login</button>
+            </div>
+            
+        </form>
+
+    </div>
+    
 {% endblock %}
