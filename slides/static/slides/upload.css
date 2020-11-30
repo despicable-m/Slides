@@ -25,21 +25,47 @@
   font-size: 15px;
   padding-left: 10px;
 }
-#upload-container .slides-form input[type=file] {
+#upload-container .slides-form .file-area {
+  position: relative;
+}
+#upload-container .slides-form .file-area input[type=file] {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+#upload-container .slides-form .file-area .file-dummy {
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px dashed #D4D4D4;
+  text-align: center;
+  transition: background 0.3s ease-in-out;
+  margin-top: 10px;
+  color: #707070;
+}
+#upload-container .slides-form .file-area .file-dummy .success {
   display: none;
 }
-#upload-container .slides-form #upload-label {
-  color: white;
-  height: 40px;
-  width: 130px;
-  background-color: #BB8900;
-  border-radius: 5px;
-  font-family: Segoe UI, Frutiger, Frutiger Linotype, Dejavu Sans, Helvetica Neue, Arial, sans-serif;
-  font-size: 15px;
-  display: flex;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  justify-content: center;
-  align-items: center;
+#upload-container .slides-form .file-area:hover .file-dummy {
+  background: rgba(255, 255, 255, 0.1);
+}
+#upload-container .slides-form .file-area input[type=file]:focus + .file-dummy {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline: -webkit-focus-ring-color auto 5px;
+}
+#upload-container .slides-form .file-area input[type=file]:valid + .file-dummy {
+  border-color: rgba(255, 217, 0, 0.4);
+  background-color: rgba(148, 126, 2, 0.4);
+}
+#upload-container .slides-form .file-area input[type=file]:valid + .file-dummy .success {
+  display: inline-block;
+}
+#upload-container .slides-form .file-area input[type=file]:valid + .file-dummy .default {
+  display: none;
 }
 #upload-container .slides-form #button-container {
   display: flex;

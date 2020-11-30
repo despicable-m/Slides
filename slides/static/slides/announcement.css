@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+#the-announcement {
+  margin: 20px;
+}
+#the-announcement #a-title {
+  display: flex;
+  justify-content: center;
+}
+#the-announcement #a-title #title-text {
+  font-family: "Roboto", sans-serif;
+  font-size: 30px;
+  margin: 0px;
+  color: #4b4b4b;
+  text-align: center;
+}
+#the-announcement #a-announcement {
+  margin-top: 5px;
+}
+#the-announcement #a-announcement #announcement-body {
+  font-family: "Open Sans", sans-serif;
+  font-weight: normal;
+  color: #363636;
+}
+
+/*# sourceMappingURL=announcement.css.map */

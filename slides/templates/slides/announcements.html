@@ -1,0 +1,32 @@
+{% extends "slides/layout.html" %}
+{% load static %}
+{% load custom_template_tags %}
+
+{% block title %} Home {% endblock %}
+
+{% block scripthead %}
+<link href="{% static 'slides/announcements.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<div id="a-l-div">
+    <p id="announcements-label">Announcements</p>
+</div>
+
+<div id="announcement-area">
+    {% for announcement in announcements %}
+        <div class="container-announcements">
+            <div class="title">{{ announcement.title }}</div>
+            <div class="announcement">{{ announcement.announcement }}</div>
+            <div class="expander">
+                <a href="{% url 'announcement' a_id=announcement.id %}">Expand</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

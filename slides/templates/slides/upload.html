@@ -31,14 +31,24 @@
             </select>
             <label class="upload-labels" for="topic">Topic</label>
             <input id="topic" type="text" name="topic">
-            <label id="upload-label" for="file">
+            <!-- <label id="upload-label" for="file">
                 <span class="material-icons">
                     cloud_upload
                 </span> &nbsp;
                 Select file
-            </label>
-            <input id="file" type="file" name="uploaded-file" accept= "application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,
-            text/plain, application/pdf, image/*">
+            </label> -->
+
+            <div class="form-group file-area">
+                <label class="upload-labels" for="file">File </label>
+            <input type="file" name="file" id="file" required="required"/>
+            <div class="file-dummy">
+              <div class="success">Your file has been selected.</div>
+              <div class="default">Please select a file</div>
+            </div>
+            </div>
+
+            <!-- <input id="file" type="file" name="uploaded-file" accept= "application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,
+            text/plain, application/pdf, image/*"> -->
             <div id="button-container">
                 <button type="submit" id="login-button">Upload</button>
             </div>

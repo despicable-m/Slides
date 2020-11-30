@@ -14,5 +14,7 @@ urlpatterns = [
     path("program/<program_id>", views.program, name="program"),
     path("announce", views.announce, name="announce"),
     path("announcement/<a_id>", views.announcement, name="announcement"),
-    path("search", views.search, name="search_results")
+    path("search", views.search, name="search_results"),
+    path("view_announcements", views.view_annoucements, name="announcements"),
+    path("documents", views.documents, name="documents")
 ]

@@ -20,10 +20,14 @@
         <div id="announcements">
             <div class="section-label">
                 <p class="label-text">Announcements</p>
-                <span id="arrow-s" class="material-icons">
-                    arrow_forward
-                </span>
-                <button class="view-all">View all</button>
+                <a href="{% url 'announcements' %}">
+                    <span id="arrow-s" class="material-icons">
+                        arrow_forward
+                    </span>
+                </a>
+                <a href="{% url 'announcements' %}">
+                    <button class="view-all">View all</button>
+                </a>
             </div>
             <div id="announcement-area">
                 {% for announcement in announcements %}
@@ -34,7 +38,6 @@
                             <a href="{% url 'announcement' a_id=announcement.id %}">Expand</a>
                         </div>
                     </div>
-                    
                 {% endfor %}
             </div>
         </div>
@@ -43,15 +46,19 @@
         <div class="section-container">
             <div class="section-label">
                 <p class="label-text">Latest Uploads</p>
-                <span id="arrow-s" class="material-icons">
-                    arrow_forward
-                </span>
-                <button class="view-all">View all</button>
+                <a href="{% url 'documents' %}">
+                    <span id="arrow-s" class="material-icons">
+                        arrow_forward
+                    </span>
+                </a>
+                <a href="{% url 'documents' %}">
+                    <button class="view-all">View all</button>
+                </a>
             </div>
             <div id="latest-uploads">
                 {% for document in documents %}
                 <div class="container-latest">
-                    <div>
+                    <div id="t-f">
                         <div id="topic">{{ document.topic }}</div>
                         <div id="filename"> {{ document.file_name }}</div> 
                     </div>
@@ -76,13 +83,14 @@
             <div class="section-label">
                 <p class="label-text">Courses</p>
                 <a href="program/{{ user.program.id }}">
-                    <button class="view-all">View all</button>
-                </a>
-                <a href="program/{{ user.program.id }}">
                     <span id="arrow-s" class="material-icons">
                         arrow_forward
                     </span>
                 </a>
+                <a href="program/{{ user.program.id }}">
+                    <button class="view-all">View all</button>
+                </a>
+                
                 
             </div>
             <div id="courses">

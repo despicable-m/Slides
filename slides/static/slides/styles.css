@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-.over-flower, #latest-uploads .container-latest {
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+.over-flower, .section-container #courses .container-courses p, #latest-uploads .container-latest #filename, #latest-uploads .container-latest #topic, #latest-uploads .container-latest {
   overflow: hidden;
   text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
@@ -93,8 +94,7 @@ body {
 .section-label .view-all {
   height: 33px;
   width: 68px;
-  margin-top: auto;
-  margin-bottom: auto;
+  margin-top: 15px;
 }
 
 #announcements {
@@ -111,6 +111,7 @@ body {
   flex-direction: row;
   overflow-x: auto;
   overflow-y: hidden;
+  padding-left: 5px;
 }
 #announcements #announcement-area .container-announcements {
   background-color: white;
@@ -120,6 +121,7 @@ body {
   height: 229px;
   margin-right: 30px;
   margin-bottom: 15px;
+  position: relative;
 }
 #announcements #announcement-area .container-announcements .title {
   font-size: 20px;
@@ -128,6 +130,29 @@ body {
   text-transform: uppercase;
   display: flex;
   justify-content: center;
+}
+#announcements #announcement-area .container-announcements .announcement {
+  font-family: "Lato", sans-serif;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 9;
+}
+#announcements #announcement-area .container-announcements .expander {
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+}
+#announcements #announcement-area .container-announcements .expander a {
+  text-decoration: none;
+}
+#announcements #announcement-area .container-announcements:after {
+  content: "";
+  display: block;
+  position: absolute;
+  right: -1rem;
+  width: 1rem;
+  height: 1px;
 }
 
 #latest-uploads {
@@ -193,6 +218,7 @@ body {
   margin-top: auto;
   margin-bottom: auto;
   color: black;
+  white-space: normal;
 }
 
 .program-year {

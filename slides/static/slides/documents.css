@@ -1,0 +1,26 @@
+#latest-uploads {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  margin-left: 50px;
+  margin-right: 50px;
+  flex-wrap: wrap;
+}
+
+#latest-uploads {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  margin-left: 30px;
+  margin-right: 30px;
+  flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 600px) {
+  #latest-uploads {
+    margin: 0px;
+    margin-top: 10px;
+  }
+}
+
+/*# sourceMappingURL=documents.css.map */

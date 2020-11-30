@@ -64,6 +64,7 @@ body {
     height: 50px;
     background-color: $accent-color;
     position: sticky;
+    position: -webkit-sticky;
     top: 0px;
 
     #nav-items {
@@ -205,26 +206,49 @@ body {
             background-color: white;
             min-height: 205px;
             min-width: 348px;
+            max-height: 205px;
             height: 205px;
             width: 348px;
             margin: 10px;
             margin-bottom: 15px;
+            //position: relative;
 
             .title {
                 font-family: 'Roboto', sans-serif;
                 font-weight: bold;
                 color: #707070;
                 font-size: 20px;
+                display: flex;
                 justify-content: center;
             }
 
             .announcement {
                 font-family: 'Lato', sans-serif;
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 8;
             }
 
             .expander {
+                // position: absolute;
+                // bottom: 5px;
+                // right: 10px;   
+
+                a {
+                    text-decoration: none;
+                }
 
             }
+        }
+
+        .container-announcements:after {
+            content: "";
+            display: block;
+            position: absolute;
+            right: -1rem;
+            width: 1rem;
+            height: 1px;
         }
     }
 }
@@ -232,14 +256,23 @@ body {
 #latest-uploads {
     margin-bottom: 10px;
     border-bottom: .1px solid #E5E0E0;
+    max-width: 100%;
+    margin-right: 10px;
+
     .container-latest {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         margin-bottom: 10px;
+        width: 100%;
         
+        #t-f {
+            width: 85%;
+        }
         #topic, #filename {
             margin-left: 10px;
+            margin-right: 5px;
+            width: 100%;
         }
 
         #topic {
@@ -247,12 +280,14 @@ body {
             font-weight: bold;
             color: #707070;
             margin-bottom: 2.5px;
+            @extend .over-flower;
         }
 
         #filename {
             font-family: 'Lato', sans-serif;
             color: #707070;
             margin-top: 2.5px;
+            @extend .over-flower;
         }
 
         .download-size {
@@ -310,6 +345,7 @@ body {
             margin-top: auto;
             margin-bottom: auto;
             color: black;
+            @extend .over-flower;
         }
     }
 }

@@ -5,17 +5,17 @@
 {% block title %} {{ announcement.title }} {% endblock %}
 
 {% block scripthead %}
-    <script src="{% static 'slides/index.js' %}"></script>
+    <link href="{% static 'slides/announcement.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
     <!-- Announcements -->
-    <div id="announcements">
-        <div id="section-label">
-            <p class="label-text">{{ announcement.title }}</p>
+    <div id="the-announcement">
+        <div id="a-title">
+            <p id="title-text">{{ announcement.title }}</p>
         </div>
-        <div id="announcement-area">
-            <div class="announcement">{{ announcement.announcement }}</div>
+        <div id="a-announcement">
+            <div id="announcement-body">{{ announcement.announcement }}</div>
         </div>
     </div>
 

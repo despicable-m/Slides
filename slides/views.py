@@ -37,13 +37,13 @@ def index(request):
 
                 return JsonResponse({"courses":courses})
 
-        courses = Course.objects.filter(level=request.user.level).order_by("course")
+        courses = Course.objects.filter(level=request.user.level).order_by("course")[:5]
         user = request.user
-        documents = Document.objects.all().order_by("-id")
+        documents = Document.objects.all().order_by("-id")[:5]
         levels = Level.objects.filter(program=request.user.program)
         years = Level.objects.filter(program=request.user.program,
                                      level=request.user.level.level)
-        announcements = Announcement.objects.all()
+        announcements = Announcement.objects.order_by("-id")[:5]
 
         return render(request, "slides/index.html", {
             "courses":courses,
@@ -291,6 +291,7 @@ def announce(request):
 
     return render(request, "slides/announce.html")
 
+
 @login_required
 def announcement(request, a_id):
     """" Let's user view full announcement """
@@ -316,4 +317,22 @@ def search(request):
         "courses":courses,
         "documents":documents,
         "announcements":announcements
+    })
+
+
+@login_required
+def view_annoucements(request):
+    announcements = Announcement.objects.all()
+
+    return render(request, "slides/announcements.html", {
+        "announcements":announcements
+    })
+
+
+@login_required
+def documents(request):
+    documents = Document.objects.all().order_by("-id")
+
+    return render(request, "slides/documents.html", {
+        "documents":documents
     })
