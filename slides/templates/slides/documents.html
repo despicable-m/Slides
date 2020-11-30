@@ -1,0 +1,39 @@
+{% extends "slides/layout.html" %}
+{% load static %}
+{% load custom_template_tags %}
+
+{% block title %} Home {% endblock %}
+
+{% block scripthead %}
+<link href="{% static 'slides/documents.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<div class="label-text">All documents</div>
+<div id="latest-uploads">
+    {% for document in documents %}
+    <div class="container-latest">
+        <div id="t-f">
+            <div id="topic">{{ document.topic }}</div>
+            <div id="filename"> {{ document.file_name }}</div> 
+        </div>
+        
+        <div class="download-size">
+            <div id="size"> {{ document.document.size|sizify}}</div>
+            <div id="url"><a href="{{ document.document.url }}" style="text-decoration: none;"> Download </a></div>
+        </div>
+        <a class="downloader" href="{{ document.document.url }}" style="text-decoration: none;">
+            <span id="file-download" class="material-icons">
+                cloud_download
+            </span>
+        </a>
+        
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

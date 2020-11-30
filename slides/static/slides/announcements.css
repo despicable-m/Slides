@@ -1,0 +1,142 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+.basic-container, #announcement-area .container-announcements {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  font-family: Segoe UI, Frutiger, Frutiger Linotype, Dejavu Sans, Helvetica Neue, Arial, sans-serif;
+  padding: 5px;
+}
+
+.basic-button {
+  background-color: #BB8900;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-left: 5px;
+  font-family: Segoe UI, Frutiger, Frutiger Linotype, Dejavu Sans, Helvetica Neue, Arial, sans-serif;
+  font-size: 15px;
+}
+
+body {
+  padding: 0px;
+  margin: 0px;
+}
+
+#page {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 50px;
+}
+
+#a-l-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+#a-l-div #announcements-label {
+  font-family: "Roboto", sans-serif;
+  margin: 0px;
+  margin-top: 10px;
+  padding: 0px;
+  font-size: 30px;
+  color: #707070;
+}
+
+#announcement-area {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: row;
+  padding-left: 5px;
+  flex-wrap: wrap;
+  padding-top: 20px;
+}
+#announcement-area .container-announcements {
+  background-color: white;
+  min-width: 381px;
+  min-height: 229px;
+  width: 381px;
+  height: 229px;
+  margin-right: 30px;
+  margin-bottom: 15px;
+  position: relative;
+}
+#announcement-area .container-announcements .title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #707070;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+}
+#announcement-area .container-announcements .announcement {
+  font-family: "Lato", sans-serif;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 9;
+}
+#announcement-area .container-announcements .expander {
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+}
+#announcement-area .container-announcements .expander a {
+  text-decoration: none;
+}
+#announcement-area .container-announcements:after {
+  content: "";
+  display: block;
+  position: absolute;
+  right: -1rem;
+  width: 1rem;
+  height: 1px;
+}
+
+@media only screen and (max-width: 600px) {
+  #announcement-area {
+    width: 100%;
+    margin-left: 2px;
+    margin-right: 2px;
+  }
+  #announcement-area .container-announcements {
+    background-color: white;
+    min-height: 205px;
+    min-width: 348px;
+    max-height: 205px;
+    height: 205px;
+    width: 348px;
+    margin-bottom: 15px;
+  }
+  #announcement-area .container-announcements .title {
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+    color: #707070;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  #announcement-area .container-announcements .announcement {
+    font-family: "Lato", sans-serif;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 8;
+  }
+  #announcement-area .container-announcements .expander {
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+  }
+  #announcement-area .container-announcements .expander a {
+    text-decoration: none;
+  }
+  #announcement-area .container-announcements:after {
+    content: "";
+    display: block;
+    position: absolute;
+    right: -1rem;
+    width: 1rem;
+    height: 1px;
+  }
+}
+
+/*# sourceMappingURL=announcements.css.map */

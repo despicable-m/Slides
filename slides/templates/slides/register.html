@@ -1,0 +1,108 @@
+{% extends "slides/layout.html" %}
+{% load static %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block scripthead %}
+    <link href="{% static 'slides/register.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block body %}
+
+    {% if message %}
+        <div class="message">{{ message }}</div>
+    {% endif %}
+
+    <div id="register-container">
+        <form class="register-form" action="{% url 'register' %}" method="POST">
+            {% csrf_token %}
+    
+            <div id="personal-details">
+
+                <div class="label-plus">
+                    <label class="register-labels" for="first-name">First name</label>
+                    <input id="first-name" type="text" name="first-name">
+                </div>
+                
+                <div class="label-plus">
+                    <label class="register-labels" for="last-name">Last name</label>
+                    <input id="last-name" type="text" name="last-name">
+                </div>
+                
+
+                <div class="label-plus">
+                    <label class="register-labels" for="username">Username</label>
+                    <input id="username" type="text" name="username">            
+                </div>
+                
+            </div>
+            
+            <div id="uni-sch">
+                <div class="label-plus">
+                    <label class="register-labels" for="university">University</label>
+                    <select id="university" name="university">
+                        <option value="">---------</option>
+                        {% for university in universities %}
+                        <option value="{{ university.id }}">{{ university.university }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+
+                <div class="label-plus">
+                    <label class="register-labels" for="school">School</label>
+                    <select id="school" name="school">
+                        <option value="">---------</option>
+                    </select>
+                </div>
+                
+            </div>
+            
+            <div id="pro-lev">
+                <div class="label-plus">
+                    <label class="register-labels" for="program">Program</label>
+                    <select id="program" name="program">
+                        <option value="">---------</option>
+                    </select>
+                </div>
+                
+
+                <div class="label-plus">
+                    <label class="register-labels" for="level">Level</label>
+                    <select id="level" name="level">
+                        <option value="">---------</option>
+                    </select>
+                </div>
+                
+            </div>
+            
+            <div id="passwords" >
+                <div class="label-plus">
+                    <label class="register-labels" for="password">Password</label>
+                    <input id="password" type="password" name="password">
+                </div>
+                
+
+                <div class="label-plus">
+                    <label class="register-labels" for="c-password">Confirm Password</label>
+                    <input id="c-password" type="password" name="c-password">
+                </div>
+                
+            </div>
+            
+            <div id="button-container" >
+                <button type="submit" id="reg-button">Submit</button>
+            </div>
+            
+        </form>
+
+    </div>
+    
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'slides/register.js' %}"></script>
+{% endblock %}

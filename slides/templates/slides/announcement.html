@@ -1,0 +1,27 @@
+{% extends "slides/layout.html" %}
+{% load static %}
+{% load custom_template_tags %}
+
+{% block title %} {{ announcement.title }} {% endblock %}
+
+{% block scripthead %}
+    <link href="{% static 'slides/announcement.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <!-- Announcements -->
+    <div id="the-announcement">
+        <div id="a-title">
+            <p id="title-text">{{ announcement.title }}</p>
+        </div>
+        <div id="a-announcement">
+            <div id="announcement-body">{{ announcement.announcement }}</div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
+

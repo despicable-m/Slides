@@ -1,0 +1,55 @@
+{% extends "slides/layout.html" %}
+{% load static %}
+{% load custom_template_tags %}
+
+{% block title %} Home {% endblock %}
+
+{% block scripthead %}
+    <script src="{% static 'slides/course.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+    <div>
+
+        <!-- Latest posts -->
+        <div class="section-container">
+            <div id="section-label">
+                <p class="label-text">
+                    {{ user.university.university }} 
+                    > 
+                    L{{ user.level.level }} 
+                    > 
+                    {{user.program.program}} 
+                    > 
+                    {{course.course}}</p>
+            </div>
+            <div id="latest-uploads">
+                {% for document in documents %}
+                <div class="container-latest">
+                    <div>
+                        <div id="topic">{{ document.topic }}</div>
+                        <div id="filename"> {{ document.file_name }}</div> 
+                    </div>
+                    
+                    <div class="download-size">
+                        <div id="size"> {{ document.document.size|sizify}}</div>
+                        <div id="url"><a href="{{ document.document.url }}" style="text-decoration: none;"> Download </a></div>
+                    </div>
+                    <a class="downloader" href="{{ document.document.url }}" style="text-decoration: none;">
+                        <span id="file-download" class="material-icons">
+                            cloud_download
+                        </span>
+                    </a>
+                    
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
+

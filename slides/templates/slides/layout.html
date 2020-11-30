@@ -1,0 +1,67 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %} Slides {% endblock %}</title>
+        <link media="screen and (min-width: 600px)" href="{% static 'slides/styles.css' %}" rel="stylesheet">
+        <link rel="stylesheet" media="screen and (max-width: 600px)" href="{% static 'slides/styles-mobile.css' %}">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="{% static 'slides/script.js' %}"></script>
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% block scripthead %}
+        {% endblock %}
+    </head>
+
+    <body>
+        
+        <div id="page">
+            <nav id="nav-el">
+                <input type="checkbox" id="fake-check">
+                <label for="fake-check" class="checkbtn">
+                    <i class="fas fa-bars"></i>
+                </label>
+                <label id="logo">SLIDES</label>
+                
+                <div id="nav-items">
+                    <ul class="menu">
+                        {% if user.is_authenticated %}
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                        <li><a href="{% url 'upload' %}">Upload</a></li>
+                        <li><a href="{% url 'announce' %}">Announce</a></li>
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                        {% else %}
+                        <li><a href="{% url 'register' %}">Register</a></li>
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                        {% endif %}
+                    </ul>
+
+                    {% if user.is_authenticated %}
+                    <form id="search-nav" action="{% url 'search_results' %}" method="GET">
+                        <span id="search-icon" class="material-icons">
+                            search
+                        </span>
+                        <input name="q" type="search" id="search-field-nav" placeholder="Search...">
+                    </form>
+                    {% endif %}
+                </div>
+                
+            </nav>
+            
+
+
+            <div class="body">
+                {% block body %}
+                {% endblock %}
+            </div>
+
+            <div class="footer">
+
+            </div>
+        </div>
+    
+    </body>
+        {% block script %}
+        {% endblock %}
+</html>

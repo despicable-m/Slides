@@ -1,0 +1,149 @@
+$font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; 
+$box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+$accent-color: #BB8900;
+
+#upload-container {
+
+    .slides-form {
+
+        .upload-labels {
+            color: #707070;
+            font-family: $font-family;
+        }
+
+        #course {
+            height: 35px;
+            color: #333333;
+            background-color: #eeeeee;
+            border: 1px solid #dddddd;
+            cursor: pointer;
+            border-radius: 5px;
+
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="50"><polygon points="0,0 100,0 50,50" style="fill:%23666666;" /></svg>');
+            background-position: right 10px top 50%;
+            background-repeat: no-repeat;
+            background-size: 10px;
+        }
+
+        #topic {
+            height: 30px;
+
+            border: 1px solid #D4D4D4;
+            border-radius: 5px;
+            font-family: $font-family;
+            font-size: 15px;
+            padding-left: 10px;
+        }
+
+        // input[type="file"] {
+        //     display: none;
+        // }
+        // #upload-label {
+        //     color: white;
+        //     height: 40px;
+        //     width: 130px;
+        //     background-color: $accent-color;
+        //     border-radius: 5px;
+        //     font-family: $font-family;
+        //     font-size: 15px;
+        //     display: flex;
+        //     box-shadow: $box-shadow;
+        //     justify-content: center;
+        //     align-items: center;
+        // }
+
+        .file-area {
+            position: relative;
+            
+            input[type=file] {
+              position: absolute;
+              height: 100%;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              opacity: 0;
+              cursor: pointer;
+            }
+            
+            .file-dummy {
+              padding: 30px;
+              background: rgba(255,255,255,0.2);
+              border: 2px dashed #D4D4D4;
+              text-align: center;
+              transition: background 0.3s ease-in-out;
+              margin-top: 10px;
+              color: #707070;
+              
+              .success {
+                display: none;
+              }
+            }
+            
+            &:hover .file-dummy {
+              background: rgba(255,255,255,0.1);
+            }
+            
+            input[type=file]:focus + .file-dummy {
+              outline: 2px solid rgba(255,255,255,0.5);
+              outline: -webkit-focus-ring-color auto 5px;
+            }
+            
+            input[type=file]:valid + .file-dummy {
+              border-color: rgba(255, 217, 0, 0.4);
+              background-color: rgba(148, 126, 2, 0.4);
+          
+              .success {
+                display: inline-block;
+              }
+              .default {
+                display: none;
+              }
+            }
+          }
+          
+
+        #button-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+
+           button {
+                background-color: $accent-color;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                margin-left: 5px;
+                font-family: $font-family;
+                font-size: 15px;
+                height: 35px;
+                width: 80px;
+                margin-top: 10px;
+            } 
+        }
+        
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .slides-form {
+        display: flex;
+        flex-direction: column;
+        margin-right: 10px;
+        margin-left: 10px;
+        padding: 10px;
+    }
+
+    .upload-labels {
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+
+    #upload-label {
+        margin-top: 10px;
+    }
+}

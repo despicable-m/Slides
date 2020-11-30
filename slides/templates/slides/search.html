@@ -1,0 +1,84 @@
+{% extends "slides/layout.html" %}
+{% load static %}
+{% load custom_template_tags %}
+
+{% block title %} Home {% endblock %}
+
+{% block scripthead %}
+    <script src="{% static 'slides/index.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+    <div>
+        {% if announcements %}
+        <!-- Announcements -->
+        <div id="announcements">
+            <div class="section-label">
+                <p class="label-text">Announcements</p>
+            </div>
+            <div id="announcement-area">
+                {% for announcement in announcements %}
+                    <div class="container-announcements">
+                        <div class="title">{{ announcement.title }}</div>
+                        <div class="announcement">{{ announcement.announcement }}</div>
+                        <div class="expander">
+                            <a href="{% url 'announcement' a_id=announcement.id %}">Expand</a>
+                        </div>
+                    </div>
+                    
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if documents %}
+        <!-- Latest posts -->
+        <div class="section-container">
+            <div class="section-label">
+                <p class="label-text">Latest Uploads</p>
+            </div>
+            <div id="latest-uploads">
+                {% for document in documents %}
+                <div class="container-latest">
+                    <div id="topic">{{ document.topic }}</div>
+                    <div id="filename"> {{ document.file_name }}</div>
+                    <div class="download-size">
+                        <div id="size"> {{ document.document.size|sizify}}</div>
+                        <div url><a href="{{ document.document.url }}" style="text-decoration: none;"> Download </a></div>
+                    </div>
+                    
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if courses %}
+        <!-- All courses available to user -->
+        <div class="section-container">
+            <div class="section-label">
+                <p class="label-text">Courses</p>
+            </div>
+            <div id="courses">
+                {% for course in courses %}
+                <a href="/course/{{ course.id }}" style="text-decoration: none;">
+                    <div data-course_id="{{ course.id }}" class="container-courses">
+                        <div  class="image-cont">
+                            <img src="{% static 'slides/assets/folder.png' %}">
+                        </div>
+                        <p>{{ course.course }}</p>
+                    </div>
+                </a>
+                
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
+

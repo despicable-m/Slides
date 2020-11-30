@@ -1,0 +1,42 @@
+{% extends "slides/layout.html" %}
+{% load static %}
+{% load custom_template_tags %}
+
+{% block title %} Home {% endblock %}
+
+{% block scripthead %}
+    <link href="{% static 'slides/program.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <div>
+
+        <!-- All courses available to user -->
+        <div class="course-container">
+            <div id="section-label">
+                <p class="label-text">Courses</p>
+            </div>
+            <div id="program-courses">
+                {% for course in courses %}
+                <a href="/course/{{ course.id }}" style="text-decoration: none;">
+
+                    <div data-course_id="{{ course.id }}" class="container-courses">
+                        <div  class="image-cont">
+                            <img src="{% static 'slides/assets/folder.png' %}">
+                        </div>
+                        <p>{{ course.course }}</p>
+
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
+
