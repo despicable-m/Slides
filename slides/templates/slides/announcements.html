@@ -12,7 +12,11 @@
 <div id="a-l-div">
     <p id="announcements-label">Announcements</p>
 </div>
-
+{% if not announcements %}
+    <div class="no-data">
+        No announcements.
+    </div>
+{% endif %}
 <div id="announcement-area">
     {% for announcement in announcements %}
         <div class="container-announcements">

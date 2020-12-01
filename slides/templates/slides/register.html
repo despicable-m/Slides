@@ -24,18 +24,18 @@
 
                 <div class="label-plus">
                     <label class="register-labels" for="first-name">First name</label>
-                    <input id="first-name" type="text" name="first-name">
+                    <input id="first-name" type="text" name="first-name" required>
                 </div>
                 
                 <div class="label-plus">
                     <label class="register-labels" for="last-name">Last name</label>
-                    <input id="last-name" type="text" name="last-name">
+                    <input id="last-name" type="text" name="last-name" required>
                 </div>
                 
 
                 <div class="label-plus">
                     <label class="register-labels" for="username">Username</label>
-                    <input id="username" type="text" name="username">            
+                    <input id="username" type="text" name="username" required>            
                 </div>
                 
             </div>
@@ -43,7 +43,7 @@
             <div id="uni-sch">
                 <div class="label-plus">
                     <label class="register-labels" for="university">University</label>
-                    <select id="university" name="university">
+                    <select id="university" name="university" required>
                         <option value="">---------</option>
                         {% for university in universities %}
                         <option value="{{ university.id }}">{{ university.university }}</option>
@@ -54,7 +54,7 @@
 
                 <div class="label-plus">
                     <label class="register-labels" for="school">School</label>
-                    <select id="school" name="school">
+                    <select id="school" name="school" required>
                         <option value="">---------</option>
                     </select>
                 </div>
@@ -64,7 +64,7 @@
             <div id="pro-lev">
                 <div class="label-plus">
                     <label class="register-labels" for="program">Program</label>
-                    <select id="program" name="program">
+                    <select id="program" name="program" required>
                         <option value="">---------</option>
                     </select>
                 </div>
@@ -72,7 +72,7 @@
 
                 <div class="label-plus">
                     <label class="register-labels" for="level">Level</label>
-                    <select id="level" name="level">
+                    <select id="level" name="level" required>
                         <option value="">---------</option>
                     </select>
                 </div>
@@ -82,19 +82,19 @@
             <div id="passwords" >
                 <div class="label-plus">
                     <label class="register-labels" for="password">Password</label>
-                    <input id="password" type="password" name="password">
+                    <input id="password" type="password" name="password" required>
                 </div>
                 
 
                 <div class="label-plus">
                     <label class="register-labels" for="c-password">Confirm Password</label>
-                    <input id="c-password" type="password" name="c-password">
+                    <input id="c-password" type="password" name="c-password" required>
                 </div>
                 
             </div>
             
             <div id="button-container" >
-                <button type="submit" id="reg-button">Submit</button>
+                <button type="submit" id="reg-button">Register</button>
             </div>
             
         </form>

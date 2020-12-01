@@ -1,4 +1,4 @@
-.over-flower, #program-courses .container-courses p {
+.over-flower {
   overflow: hidden;
   text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
@@ -45,7 +45,7 @@ body {
   display: flex;
   flex-direction: row;
   width: 154px;
-  height: 52px;
+  height: 62px;
   margin: 5px;
   margin-right: 40px;
   margin-bottom: 15px;
@@ -68,7 +68,10 @@ body {
   margin-top: auto;
   margin-bottom: auto;
   color: black;
-  white-space: normal;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 @media only screen and (max-width: 600px) {
@@ -82,7 +85,7 @@ body {
   #program-courses .container-courses {
     display: flex;
     flex-direction: row;
-    height: 32px;
+    height: 42px;
     width: auto;
     margin: 5px;
     margin-left: 10px;
@@ -107,6 +110,11 @@ body {
     margin-top: auto;
     margin-bottom: auto;
     color: black;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
   }
 }
 

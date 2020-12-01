@@ -73,13 +73,13 @@ class Document(models.Model):
     school = models.ForeignKey(School, on_delete=models.CASCADE)
     program = models.ForeignKey(Program, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    topic = models.CharField(max_length=255)
+    topic = models.CharField(max_length=10000)
     date = models.DateField()
     time = models.TimeField()
-    slug = models.CharField(max_length=255)
-    file_name = models.CharField(max_length=256, default="something.jpg")
+    slug = models.CharField(max_length=10000)
+    file_name = models.CharField(max_length=10000, default="something.jpg")
 
-    document = models.FileField(upload_to=add_path)
+    document = models.FileField(upload_to=add_path, max_length=1000)
 
     def __str__(self):
         return f"{self.document}"

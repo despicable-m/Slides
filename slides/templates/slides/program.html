@@ -16,6 +16,11 @@
             <div id="section-label">
                 <p class="label-text">Courses</p>
             </div>
+            {% if not courses %}
+                <div class="no-data">
+                    No courses available.
+                </div>
+            {% endif %}
             <div id="program-courses">
                 {% for course in courses %}
                 <a href="/course/{{ course.id }}" style="text-decoration: none;">

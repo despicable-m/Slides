@@ -10,6 +10,11 @@
 
 {% block body %}
 <div class="label-text">All documents</div>
+{% if not documents %}
+    <div class="no-data">
+        No documents
+    </div>
+{% endif %}
 <div id="latest-uploads">
     {% for document in documents %}
     <div class="container-latest">

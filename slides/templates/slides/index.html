@@ -12,7 +12,7 @@
     <div>
         <!-- Search area -->
         <form id="search" action="{% url 'search_results' %}" method="GET">
-            <input name="q" type="search" id="search-field" placeholder="Search...">
+            <input name="q" type="search" id="search-field" placeholder="Search..." required>
             <button type="submit" id="search-button">Search</button>
         </form>
 
@@ -82,15 +82,14 @@
         <div class="section-container">
             <div class="section-label">
                 <p class="label-text">Courses</p>
-                <a href="program/{{ user.program.id }}">
+                <a href="program/{{ user.level.id }}">
                     <span id="arrow-s" class="material-icons">
                         arrow_forward
                     </span>
                 </a>
-                <a href="program/{{ user.program.id }}">
+                <a href="program/{{ user.level.id }}">
                     <button class="view-all">View all</button>
                 </a>
-                
                 
             </div>
             <div id="courses">
@@ -136,4 +135,3 @@
 {% block script %}
 
 {% endblock %}
-

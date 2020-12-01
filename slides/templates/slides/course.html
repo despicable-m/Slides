@@ -23,6 +23,12 @@
                     > 
                     {{course.course}}</p>
             </div>
+
+            {% if not documents %}
+                <div class="no-data">
+                    No documents uploaded for this course yet.
+                </div>
+            {% endif %}
             <div id="latest-uploads">
                 {% for document in documents %}
                 <div class="container-latest">

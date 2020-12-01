@@ -4,7 +4,7 @@
 }
 
 .basic-select, #register-container .register-form #pro-lev #program, #register-container .register-form #pro-lev #level, #register-container .register-form #uni-sch #university, #register-container .register-form #uni-sch #school {
-  height: 35px;
+  height: 45px;
   color: #333333;
   background-color: #eeeeee;
   border: 1px solid #dddddd;
@@ -48,7 +48,7 @@
   flex-wrap: wrap;
 }
 #register-container .register-form #personal-details #first-name, #register-container .register-form #personal-details #last-name, #register-container .register-form #personal-details #username {
-  height: 30px;
+  height: 40px;
   border: 1px solid #D4D4D4;
   border-radius: 5px;
   font-family: Segoe UI, Frutiger, Frutiger Linotype, Dejavu Sans, Helvetica Neue, Arial, sans-serif;
@@ -80,7 +80,7 @@
   flex-wrap: wrap;
 }
 #register-container .register-form #passwords #password, #register-container .register-form #passwords #c-password {
-  height: 30px;
+  height: 40px;
   border: 1px solid #D4D4D4;
   border-radius: 5px;
   font-family: Segoe UI, Frutiger, Frutiger Linotype, Dejavu Sans, Helvetica Neue, Arial, sans-serif;
@@ -107,29 +107,42 @@
     margin-right: auto;
   }
   #register-container .register-form {
-    justify-content: center;
+    width: 100%;
   }
   #register-container .register-form #personal-details {
     display: flex;
     flex-direction: column;
     margin-left: 10px;
     margin-right: 10px;
-    width: 260px;
+    width: auto;
   }
   #register-container .register-form #uni-sch {
     flex-direction: column;
     margin-left: 10px;
     margin-right: 10px;
   }
+  #register-container .register-form #uni-sch #university, #register-container .register-form #uni-sch #school {
+    width: auto;
+  }
   #register-container .register-form #pro-lev {
     flex-direction: column;
     margin-left: 10px;
     margin-right: 10px;
   }
+  #register-container .register-form #pro-lev #program, #register-container .register-form #pro-lev #level {
+    width: auto;
+  }
   #register-container .register-form #passwords {
     flex-direction: column;
     margin-right: 10px;
     margin-left: 10px;
+  }
+  #register-container .register-form #passwords #password, #register-container .register-form #passwords #c-password {
+    width: auto;
+  }
+  #register-container #button-container {
+    display: flex;
+    justify-content: center;
   }
 }
 

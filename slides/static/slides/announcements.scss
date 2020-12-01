@@ -83,7 +83,7 @@ body {
             overflow: hidden;
             display: -webkit-box;
             -webkit-box-orient: vertical;
-            -webkit-line-clamp: 9;
+            -webkit-line-clamp: 7;
         }
 
         .expander {
@@ -122,6 +122,7 @@ body {
             height: 205px;
             width: 348px;
             margin-bottom: 15px;
+            position: static;
 
             .title {
                 font-family: 'Roboto', sans-serif;
@@ -137,13 +138,13 @@ body {
                 overflow: hidden;
                 display: -webkit-box;
                 -webkit-box-orient: vertical;
-                -webkit-line-clamp: 8;
+                -webkit-line-clamp: 6;
             }
 
             .expander {
-                position: absolute;
-                bottom: 5px;
-                right: 10px;   
+                position: static;
+                // bottom: 5px;
+                // right: 10px;   
 
                 a {
                     text-decoration: none;

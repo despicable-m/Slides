@@ -3,6 +3,8 @@
 import json
 from pathlib import Path
 from datetime import datetime
+from django.utils.datastructures import MultiValueDictKeyError
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
@@ -39,7 +41,7 @@ def index(request):
 
         courses = Course.objects.filter(level=request.user.level).order_by("course")[:5]
         user = request.user
-        documents = Document.objects.all().order_by("-id")[:5]
+        documents = Document.objects.filter(program=request.user.program).order_by("-id")[:5]
         levels = Level.objects.filter(program=request.user.program)
         years = Level.objects.filter(program=request.user.program,
                                      level=request.user.level.level)
@@ -156,31 +158,42 @@ def register(request):
                 print(level_dict)
                 return JsonResponse({"levels":level_dict})
         else:
-            # When form is submitted
-            username = request.POST["username"]
-            first_name = request.POST["first-name"]
-            last_name = request.POST["last-name"]
-            university = University.objects.get(pk=request.POST["university"])
-            school = School.objects.get(pk=request.POST["school"])
-            program = Program.objects.get(pk=request.POST["program"])
-            level = Level.objects.get(pk=request.POST["level"])
-            password = request.POST["password"]
 
             # Tries registering user
             try:
-                user = User.objects.create_user(username,
-                                                first_name=first_name,
-                                                last_name=last_name,
-                                                university=university,
-                                                school=school,
-                                                program=program,
-                                                level=level,
-                                                password=password)
-                user.save()
-            except IntegrityError:
+                username = request.POST["username"]
+                first_name = request.POST["first-name"]
+                last_name = request.POST["last-name"]
+                university = University.objects.get(pk=request.POST["university"])
+                school = School.objects.get(pk=request.POST["school"])
+                program = Program.objects.get(pk=request.POST["program"])
+                level = Level.objects.get(pk=request.POST["level"])
+                password = request.POST["password"]
+
+                if len(password) < 1:
+                    messages.error(request, "Please fill all fields")
+                    universities = University.objects.all()
+                    return render(request, "slides/register.html", {
+                        "universities": universities
+                    })
+
+                else:
+                    user = User.objects.create_user(username,
+                                                    first_name=first_name,
+                                                    last_name=last_name,
+                                                    university=university,
+                                                    school=school,
+                                                    program=program,
+                                                    level=level,
+                                                    password=password)
+                    user.save()
+            except ValueError:
+                messages.error(request, "Please fill all fields.")
+                universities = University.objects.all()
                 return render(request, "slides/register.html", {
-                    "message":"Invalid username and/or password."
+                    "universities": universities
                 })
+
             login(request, user)
             return HttpResponseRedirect(reverse("index"))
     universities = University.objects.all()
@@ -203,9 +216,8 @@ def login_view(request):
             login(request, user)
             return HttpResponseRedirect(reverse("index"))
         else:
-            return render(request, "slides/login.html", {
-                "message":"Invalid username and/or password."
-            })
+            messages.error(request, "Invalid username/password")
+            return render(request, "slides/login.html")
     else:
         return render(request, "slides/login.html")
 
@@ -220,33 +232,44 @@ def logout_view(request):
 def upload(request):
     """ Let's user upload files """
     if request.method == "POST":
-        user = request.user
-        the_file = request.FILES["uploaded-file"]
-        file_name = request.FILES["uploaded-file"].name
-        topic = request.POST["topic"]
-        course = Course.objects.get(pk=request.POST["course"])
 
-        slug = Path('{0}/{1}/{2}/{3}/{4}/{5}'.format(
-            user.level.year,
-            user.university.university,
-            user.school.school,
-            user.program.program,
-            user.level.level,
-            course.course))
+        try:
+            user = request.user
+            the_file = request.FILES["uploaded-file"]
+            file_name = request.FILES["uploaded-file"].name
+            topic = request.POST["topic"]
+            course = Course.objects.get(pk=request.POST["course"])
+            
+            slug = Path('{0}/{1}/{2}/{3}/{4}/{5}'.format(
+                user.level.year,
+                user.university.university,
+                user.school.school,
+                user.program.program,
+                user.level.level,
+                course.course))
 
-        Document.objects.create(user=user,
-                                university=user.university,
-                                school=user.school,
-                                program=user.program,
-                                course=course,
-                                topic=topic,
-                                slug=slug,
-                                file_name=file_name,
-                                date=d,
-                                time=t,
-                                document=the_file)
+            Document.objects.create(user=user,
+                                    university=user.university,
+                                    school=user.school,
+                                    program=user.program,
+                                    course=course,
+                                    topic=topic,
+                                    slug=slug,
+                                    file_name=file_name,
+                                    date=d,
+                                    time=t,
+                                    document=the_file)
+            
+            messages.success(request, "File uploaded successfully.")
 
-        return render(request, 'slides/upload.html')
+            return HttpResponseRedirect(reverse('index'))
+
+        except MultiValueDictKeyError:
+            messages.warning(request, "Please fill all fields")
+            courses = Course.objects.filter(level=request.user.level)
+            return render(request, "slides/upload.html", {
+                "courses":courses
+            })
 
     courses = Course.objects.filter(level=request.user.level)
     return render(request, "slides/upload.html", {
@@ -282,12 +305,16 @@ def announce(request):
         user = request.user
         title = request.POST["announce-title"]
         announcement = request.POST["announce-compose"]
-        print(user, title, announcement)
 
-        Announcement.objects.create(user=user,
-                                    title=title,
-                                    announcement=announcement)
-        return HttpResponseRedirect(reverse('index'))
+        if len(title) <= 1 or len(announcement) <= 1:
+            messages.warning(request, "Title and detail require at least two characters each.")
+            return render(request, "slides/announce.html")
+        else:
+            Announcement.objects.create(user=user,
+                                        title=title,
+                                        announcement=announcement)
+            messages.success(request, "Announcement successful")
+            return HttpResponseRedirect(reverse('index'))
 
     return render(request, "slides/announce.html")
 
@@ -331,7 +358,7 @@ def view_annoucements(request):
 
 @login_required
 def documents(request):
-    documents = Document.objects.all().order_by("-id")
+    documents = Document.objects.filter(program=request.user.program).order_by("-id")
 
     return render(request, "slides/documents.html", {
         "documents":documents

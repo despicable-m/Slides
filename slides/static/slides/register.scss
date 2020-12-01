@@ -7,7 +7,7 @@ $accent-color: #BB8900;
 }
 
 .basic-select {
-    height: 35px;
+    height: 45px;
     color: #333333;
     background-color: #eeeeee;
     border: 1px solid #dddddd;
@@ -55,7 +55,7 @@ $accent-color: #BB8900;
             flex-wrap: wrap;
 
             #first-name, #last-name, #username {
-                height: 30px;
+                height: 40px;
                 border: 1px solid #D4D4D4;
                 border-radius: 5px;
                 font-family: $font-family;
@@ -95,7 +95,7 @@ $accent-color: #BB8900;
             flex-wrap: wrap;
 
             #password, #c-password {
-                height: 30px;
+                height: 40px;
                 border: 1px solid #D4D4D4;
                 border-radius: 5px;
                 font-family: $font-family;
@@ -130,33 +130,54 @@ $accent-color: #BB8900;
         margin-right: auto;
 
         .register-form {
-            justify-content: center;
+            width: 100%;
             #personal-details {
                 display: flex;
                 flex-direction: column;
                 margin-left: 10px;
                 margin-right: 10px;
-                width: 260px;
+                width: auto;
             }
 
             #uni-sch {
                 flex-direction: column;
                 margin-left: 10px;
                 margin-right: 10px;
+                
+                #university, #school {
+                    width: auto;
+                }
             }
 
             #pro-lev {
                 flex-direction: column;
                 margin-left: 10px;
                 margin-right: 10px;
+
+                #program, #level {
+                    width: auto;
+                }
             }
 
             #passwords {
                 flex-direction: column;
                 margin-right: 10px;
                 margin-left: 10px;
+
+                #password, #c-password {
+                    width: auto;
+                }
             }
         }
+
+        #button-container {
+            display: flex;
+            justify-content: center;
+            
+            button {
+                
+            }
+        }  
         
     }
     
