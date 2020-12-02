@@ -8,7 +8,7 @@ All users are supposed to open an account (register) before they can upload or a
 ## Homepage
 After registration, users are logged in and redirected to the homepage where they have access to up to five recent announcements for students in the user's university, five recently uploaded documents specific to the user's level and course, courses specific to the user's level and program, and levels. The user can view more annoucements, uploaded documents and courses by click or tapping on the view all button adjacent to each category.
 
-![alt text](master/readme_assets/slides_homepage.jpg)
+![alt text](readme_assets/slides_homepage.jpg)
 
 User can make announcments or uploads files, one at a time, by clicking on the relevant nav-link on the navigation bar.
 
