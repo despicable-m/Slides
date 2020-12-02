@@ -7,7 +7,7 @@ $accent-color: #BB8900;
 }
 
 .basic-select {
-    height: 45px;
+    height: 35px;
     color: #333333;
     background-color: #eeeeee;
     border: 1px solid #dddddd;
@@ -55,7 +55,7 @@ $accent-color: #BB8900;
             flex-wrap: wrap;
 
             #first-name, #last-name, #username {
-                height: 40px;
+                height: 30px;
                 border: 1px solid #D4D4D4;
                 border-radius: 5px;
                 font-family: $font-family;
@@ -95,7 +95,7 @@ $accent-color: #BB8900;
             flex-wrap: wrap;
 
             #password, #c-password {
-                height: 40px;
+                height: 30px;
                 border: 1px solid #D4D4D4;
                 border-radius: 5px;
                 font-family: $font-family;
@@ -168,16 +168,16 @@ $accent-color: #BB8900;
                     width: auto;
                 }
             }
-        }
 
-        #button-container {
-            display: flex;
-            justify-content: center;
-            
-            button {
+            #button-container {
+                display: flex;
+                justify-content: center;
                 
-            }
-        }  
+                button {
+                    
+                }
+            }  
+        }
         
     }
     
