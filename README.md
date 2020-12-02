@@ -8,9 +8,9 @@ All users are supposed to open an account (register) before they can upload or a
 ## Homepage
 After registration, users are logged in and redirected to the homepage where they have access to up to five recent announcements for students in the user's university, five recently uploaded documents specific to the user's level and course, courses specific to the user's level and program, and levels. The user can view more annoucements, uploaded documents and courses by click or tapping on the view all button adjacent to each category.
 
-![alt text](https://github.com/despicable-m/capstone/blob/master/readme_assets/slides_homepage.jpeg?raw=true)
+User can make announcements or uploads files, one at a time, by clicking on the relevant nav-link on the navigation bar.
 
-User can make announcments or uploads files, one at a time, by clicking on the relevant nav-link on the navigation bar.
+![Homepage after logging in](readme_assets/Slides_homepage.jpeg)
 
 # Why the restrictions?
 While the restrictions make sure that users are not overwhelmed by too many documents and announcements that are not relevant to them, the restrictions also make sure that some documents that some lecturers might not want distributed outside the university do not get distributed outside the university.
