@@ -28,6 +28,9 @@ This file contains all the web app's urls
 ### [slides/views.py](slides/views.py "views.py")
 This file contains all the program's views.
 
+### [slides/templatetags/custom_template_tags.py](slides/templatetags/custom_template_tags.py "custom_template_tags.py")
+This contains custom template tags for the web app
+
 ## Front end
 
 ## _Templates_
@@ -68,7 +71,7 @@ Displays search results
 ### [slides/templates/slides/upload.html](slides/templates/slides/upload.html)
 This is where the user can upload files
 
-## _Static files_
+## _Static files_ - Javascript
 
 ### [slides/static/slides/index.js](slides/static/slides/index.js)
 This javascript file controls the homepage of the web app
@@ -79,4 +82,20 @@ This works on the user registration page. It sends the user's selections to the 
 ### [slides/static/slides/script.js](slides/static/slides/script.js)
 General javascript file for the web application.
 
+## _Static files_ - _SASS(SCSS)/CSS_
+The files here - aside styles.scss, styles.css, styles.css.map, styles-mobile.scss, styles-mobile.css and styles-mobile.css.map - are the 'design' files of their named html file.
 
+Example: announce.scss is the 'design file for announce.html which is compiled to announce.css using announce.css.map.
+
+### [slides/static/slides/styles.scss](slides/static/slides/styles.scss)
+This the the sass file for the general UI of the web application. This contains the design of the navigation bar, the homepage, the footer and other aspects of the web application is desktop mode. This is compiled to styles.css for use by the browser.
+
+### [slides/static/slides/styles-mobile.scss](slides/static/slides/styles-mobile.scss)
+This works just like the **styles.scss** but in mobile mode using media query. This is also compiled to styles-mobile.css for use by the browser.
+
+![Mobile homepage](readme_assets/slides_homepage_mobile.png)
+
+## Others
+
+### document
+This is where all unploaded files are stored.
