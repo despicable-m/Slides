@@ -334,12 +334,13 @@ def search(request):
     """ Displays serach results to user """
     query = request.GET.get('q')
     courses = Course.objects.filter(
-                                    Q(course_code__icontains=query) | Q(course__icontains=query)
-                                    ).order_by("course")
+                                    (Q(course_code__icontains=query) | Q(course__icontains=query)),
+                                        level=request.user.level.id).order_by("course")
     documents = Document.objects.filter(
-                                        Q(topic__icontains=query) | Q(file_name__icontains=query)
-                                        ).order_by("-id")
-    announcements = Announcement.objects.filter(Q(title__icontains=query) | Q(announcement__icontains=query))
+                                        (Q(topic__icontains=query) | Q(file_name__icontains=query)),
+                                        program=request.user.program).order_by("-id")
+    announcements = Announcement.objects.filter((Q(title__icontains=query) | Q(announcement__icontains=query)),
+                                                user__university=request.user.university).order_by("-id")
     return render(request, "slides/search.html", {
         "courses":courses,
         "documents":documents,
