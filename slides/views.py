@@ -45,7 +45,7 @@ def index(request):
         levels = Level.objects.filter(program=request.user.program)
         years = Level.objects.filter(program=request.user.program,
                                      level=request.user.level.level)
-        announcements = Announcement.objects.order_by("-id")[:5]
+        announcements = Announcement.objects.filter(user__university=request.user.university).order_by("-id")[:5]
 
         return render(request, "slides/index.html", {
             "courses":courses,
@@ -349,7 +349,7 @@ def search(request):
 
 @login_required
 def view_annoucements(request):
-    announcements = Announcement.objects.all()
+    announcements = Announcement.objects.filter(user__university=request.user.university).order_by("-id")
 
     return render(request, "slides/announcements.html", {
         "announcements":announcements
