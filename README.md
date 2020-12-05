@@ -73,14 +73,8 @@ This is where the user can upload files.
 
 ## _Static files_ - Javascript
 
-### [slides/static/slides/index.js](slides/static/slides/index.js)
-This javascript file controls the homepage of the web app.
-
 ### [slides/static/slides/register.js](slides/static/slides/register.js)
-This works on the user registration page. It sends the user's selections to the back end and receives relevant data that the user uses in registering.
-
-### [slides/static/slides/script.js](slides/static/slides/script.js)
-General javascript file for the web application.
+This works on the user registration page. It sends the user's selections to the back end and receives relevant data that the user uses in registering - When the user chooses a university, that data is sent to the back end and available schools in the chosen university are sent back to the user to choose. This also happens when a school is chosen where the programs in that school are received by the user and levels after a program is chosen.
 
 ## _Static files_ - _SASS(SCSS)/CSS_
 The files here - aside styles.scss, styles.css, styles.css.map, styles-mobile.scss, styles-mobile.css and styles-mobile.css.map - are the 'design' files of their named html file.
