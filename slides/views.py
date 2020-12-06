@@ -1,5 +1,4 @@
 """ Views """
-# import os
 import json
 from pathlib import Path
 from datetime import datetime
@@ -12,8 +11,6 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.db.models import Q
 from django.db import IntegrityError
-# from django.views.decorators.csrf import csrf_exempt
-# from django.core.files.storage import FileSystemStorage
 
 from .models import User, University, School, Program, Level, Course, Document, Announcement
 
