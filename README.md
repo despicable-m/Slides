@@ -1,6 +1,6 @@
 # Slides overview 
 
-The app allows users - students - to upload course materials and make announcements which are then stored in a database that can only be seen by users in the same university and in some cases, only users who are reading the same program as the uploader in the same university.
+The application allows users - students - to upload course materials and make announcements which are then stored in a database that can only be seen by users in the same university and in some cases, only users who are reading the same program as the uploader in the same university.
 
 ## Registration
 All users are supposed to open an account (register) before they can upload or access anything. During registration, users are asked to select their university, school (department), program and level from a list added to the database by a site administrator.
@@ -93,3 +93,6 @@ This works just like the **styles.scss** but in mobile mode using media query. T
 
 ### document
 This is where all unploaded files are stored.
+
+# Demo
+You can watch the video of the project on YouTube here: https://youtu.be/GjEVA7XinyU
