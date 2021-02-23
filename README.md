@@ -19,61 +19,61 @@ While the restrictions make sure that users are not overwhelmed by too many docu
 
 ## Back end
 
-### [slides/models.py](slides/models.py "models.py")
+### [models.py](slides/models.py "models.py")
 This file contains all the program's models
 
-### [slides/urls.py](slides/urls.py "urls.py")
+### [urls.py](slides/urls.py "urls.py")
 This file contains all the web application's urls
 
-### [slides/views.py](slides/views.py "views.py")
+### [views.py](slides/views.py "views.py")
 This file contains all the program's views.
 
-### [slides/templatetags/custom_template_tags.py](slides/templatetags/custom_template_tags.py "custom_template_tags.py")
+### [custom_template_tags.py](slides/templatetags/custom_template_tags.py "custom_template_tags.py")
 This contains custom template tags for the web application.
 
 ## Front end
 
 ## _Templates_
 
-### [slides/templates/slides/announce.html](slides/templates/slides/announce.html "announce.html")
+### [announce.html](slides/templates/slides/announce.html "announce.html")
 This is the page where the user can compose new announcements.
 
-### [slides/templates/slides/announcement.html](slides/templates/slides/announcement.html "announcement.html")
+### [announcement.html](slides/templates/slides/announcement.html "announcement.html")
 The user is directed to this page when s/he expands an announcement
 
-### [slides/templates/slides/announcements.html](slides/templates/slides/announcements.html "announcements.html")
+### [announcements.html](slides/templates/slides/announcements.html "announcements.html")
 This page is where the user views all announcements
 
-### [slides/templates/slides/course.html](slides/templates/slides/course.html "course.html")
+### [course.html](slides/templates/slides/course.html "course.html")
 Shows all uploaded documents for a particular course.
 
-### [slides/templates/slides/documents.html](slides/templates/slides/documents.html "documents.html")
+### [documents.html](slides/templates/slides/documents.html "documents.html")
 Displays all uploaded documents relevant to the user
 
 ### [slides/templates/slides/index.html](slides/templates/slides/index.html "index.html")
 This is the homepage of the web application
 
-### [slides/templates/slides/layout.html](slides/templates/slides/layout.html "layout.html")
+### [layout.html](slides/templates/slides/layout.html "layout.html")
 General layout of the web application's UI. It has the navbar, most scripts, general page and the footer. This is extended by other html files.
 
-### [slides/templates/slides/login.html](slides/templates/slides/login.html "login.html")
+### [login.html](slides/templates/slides/login.html "login.html")
 This is the user login page.
 
-### [slides/templates/slides/program.html](slides/templates/slides/program.html "program.html")
+### [program.html](slides/templates/slides/program.html "program.html")
 Shows all available courses of a particular program. This is diplayed based on the level clicked on by the user on the homepage.
 
-### [slides/templates/slides/register.html](slides/templates/slides/register.html "register.html")
+### [register.html](slides/templates/slides/register.html "register.html")
 User registration page.
 
-### [slides/templates/slides/search.html](slides/templates/slides/search.html "search.html")
+### [search.html](slides/templates/slides/search.html "search.html")
 Displays search results.
 
-### [slides/templates/slides/upload.html](slides/templates/slides/upload.html "upload.html")
+### [upload.html](slides/templates/slides/upload.html "upload.html")
 This is where the user can upload files.
 
 ## _Static files_ - Javascript
 
-### [slides/static/slides/register.js](slides/static/slides/register.js "register.js")
+### [register.js](slides/static/slides/register.js "register.js")
 This works on the user registration page. It sends the user's selections to the back end and receives relevant data that the user uses in registering - When the user chooses a university, that data is sent to the back end and available schools in the chosen university are sent back to the user to choose. This also happens when a school is chosen where the programs in that school are received by the user and levels after a program is chosen.
 
 ## _Static files_ - _SASS(SCSS)/CSS_
@@ -81,10 +81,10 @@ The files here - aside styles.scss, styles.css, styles.css.map, styles-mobile.sc
 
 Example: announce.scss is the 'design' file for announce.html which is compiled to announce.css using announce.css.map.
 
-### [slides/static/slides/styles.scss](slides/static/slides/styles.scss "styles.scss")
+### [styles.scss](slides/static/slides/styles.scss "styles.scss")
 This is the sass file for the general UI of the web application. This contains the design of the navigation bar, the homepage, the footer and other aspects of the web application is desktop mode. This is compiled to styles.css for use by the browser.
 
-### [slides/static/slides/styles-mobile.scss](slides/static/slides/styles-mobile.scss "styles-mobile.scss")
+### [styles-mobile.scss](slides/static/slides/styles-mobile.scss "styles-mobile.scss")
 This works just like the **styles.scss** but in mobile mode using media query. This is also compiled to styles-mobile.css for use by the browser.
 
 ![Mobile homepage](readme_assets/slides_homepage_mobile.png)
