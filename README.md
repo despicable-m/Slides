@@ -50,7 +50,7 @@ Shows all uploaded documents for a particular course.
 ### [documents.html](slides/templates/slides/documents.html "documents.html")
 Displays all uploaded documents relevant to the user
 
-### [slides/templates/slides/index.html](slides/templates/slides/index.html "index.html")
+### [index.html](slides/templates/slides/index.html "index.html")
 This is the homepage of the web application
 
 ### [layout.html](slides/templates/slides/layout.html "layout.html")
