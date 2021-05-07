@@ -1,1 +1,1 @@
-web: gunicorn slides.wsgi
+web: gunicorn Slides.wsgi
